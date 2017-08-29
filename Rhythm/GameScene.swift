@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 //test
 class GameScene: SKScene {
-    
+  //wow
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
