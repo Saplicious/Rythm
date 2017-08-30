@@ -13,12 +13,12 @@
 		3D55C36D1F512AB50019CA48 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55C36C1F512AB50019CA48 /* GameScene.swift */; };
 		3D55C36F1F512AB50019CA48 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55C36E1F512AB50019CA48 /* GameViewController.swift */; };
 		3D55C3721F512AB50019CA48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D55C3701F512AB50019CA48 /* Main.storyboard */; };
-		3D55C3741F512AB50019CA48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D55C3731F512AB50019CA48 /* Assets.xcassets */; };
 		3D55C3771F512AB50019CA48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D55C3751F512AB50019CA48 /* LaunchScreen.storyboard */; };
 		3D55C3821F512AB50019CA48 /* RhythmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55C3811F512AB50019CA48 /* RhythmTests.swift */; };
 		3D55C38D1F512AB50019CA48 /* RhythmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55C38C1F512AB50019CA48 /* RhythmUITests.swift */; };
 		521A7E841F566FE4000D7C12 /* JustinsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7E831F566FE4000D7C12 /* JustinsDemo.swift */; };
 		521A7E861F566FF4000D7C12 /* JustinsDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = 521A7E851F566FF4000D7C12 /* JustinsDemo.sks */; };
+		525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A18B91F56845F000F7C9D /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,6 @@
 		3D55C36C1F512AB50019CA48 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		3D55C36E1F512AB50019CA48 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		3D55C3711F512AB50019CA48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3D55C3731F512AB50019CA48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D55C3761F512AB50019CA48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D55C3781F512AB50019CA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D55C37D1F512AB50019CA48 /* RhythmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RhythmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +56,7 @@
 		3D55C38E1F512AB50019CA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		521A7E831F566FE4000D7C12 /* JustinsDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustinsDemo.swift; sourceTree = "<group>"; };
 		521A7E851F566FF4000D7C12 /* JustinsDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JustinsDemo.sks; sourceTree = "<group>"; };
+		525A18B91F56845F000F7C9D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +87,7 @@
 		3D55C35A1F512AB50019CA48 = {
 			isa = PBXGroup;
 			children = (
+				525A18B91F56845F000F7C9D /* Images.xcassets */,
 				3D55C3651F512AB50019CA48 /* Rhythm */,
 				3D55C3801F512AB50019CA48 /* RhythmTests */,
 				3D55C38B1F512AB50019CA48 /* RhythmUITests */,
@@ -115,7 +116,6 @@
 				3D55C36A1F512AB50019CA48 /* Actions.sks */,
 				3D55C36E1F512AB50019CA48 /* GameViewController.swift */,
 				3D55C3701F512AB50019CA48 /* Main.storyboard */,
-				3D55C3731F512AB50019CA48 /* Assets.xcassets */,
 				3D55C3751F512AB50019CA48 /* LaunchScreen.storyboard */,
 				3D55C3781F512AB50019CA48 /* Info.plist */,
 			);
@@ -252,8 +252,8 @@
 			files = (
 				3D55C3721F512AB50019CA48 /* Main.storyboard in Resources */,
 				3D55C3691F512AB50019CA48 /* GameScene.sks in Resources */,
-				3D55C3741F512AB50019CA48 /* Assets.xcassets in Resources */,
 				3D55C3771F512AB50019CA48 /* LaunchScreen.storyboard in Resources */,
+				525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */,
 				3D55C36B1F512AB50019CA48 /* Actions.sks in Resources */,
 				521A7E861F566FF4000D7C12 /* JustinsDemo.sks in Resources */,
 			);

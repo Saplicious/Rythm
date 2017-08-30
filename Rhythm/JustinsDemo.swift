@@ -19,6 +19,10 @@ class JustinsDemo: SKScene {
     private var spinnyNode : SKShapeNode?
     
     let char = SKSpriteNode(imageNamed: "board")
+    let left = SKSpriteNode(imageNamed: "left")
+    let right = SKSpriteNode(imageNamed: "right")
+    var xPos = 0.0
+    
     
     override func sceneDidLoad() {
         
@@ -36,9 +40,36 @@ class JustinsDemo: SKScene {
         char.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         char.position = CGPoint(x:0, y:-500)
         self.addChild(char)
+
+        
+        left.zPosition = 1
+        left.size = CGSize(width: self.size.width/2, height: self.size.height)
+        left.anchorPoint = CGPoint(x: 1, y: 0.5)
+        left.position = CGPoint(x:0, y:0)
+        self.addChild(left)
+        right.zPosition = 1
+        right.size = CGSize(width: self.size.width/2, height: self.size.height)
+        right.anchorPoint = CGPoint(x: 0, y: 0.5)
+        right.position = CGPoint(x:0, y:0)
+        self.addChild(right)
         
     }
     
+    func goLeft()  {
+        
+        char.anchorPoint = CGPoint(x: xPos, y: 0.5)
+        char.run(SKAction.rotate(byAngle: -CGFloat(Double.pi), duration: 0.1))
+
+        
+    }
+    
+    func goRight()  {
+        
+        char.anchorPoint = CGPoint(x: xPos, y: 0.5)
+        char.run(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0.1))
+
+
+    }
     
     func touchDown(atPoint pos : CGPoint) {
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
@@ -69,7 +100,21 @@ class JustinsDemo: SKScene {
             label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
         }
         
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        for t in touches {
+            
+            if left.contains(t.location(in: self)) {
+                
+                left.alpha = 0.2
+                goLeft()
+                
+            }
+            if right.contains(t.location(in: self)) {
+                
+                right.alpha = 0.2
+                goRight()
+                
+            }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -77,7 +122,19 @@ class JustinsDemo: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        for t in touches {
+            if left.contains(t.location(in: self)) {
+                
+                left.alpha = 1.0
+                
+            }
+            if right.contains(t.location(in: self)) {
+                
+                right.alpha = 1.0
+                
+            }
+            
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
