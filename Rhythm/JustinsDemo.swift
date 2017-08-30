@@ -9,8 +9,8 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
-
+class JustinsDemo: SKScene {
+    
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
@@ -18,25 +18,29 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
-    let char = SKSpriteNode(imageNamed: "board")
-    
     override func sceneDidLoad() {
-
+        
         self.lastUpdateTime = 0
-        self.backgroundColor = SKColor(red: 36/255, green: 46/255, blue: 48/255, alpha: 1.0)
         
-        load()
+        // Get label node from scene and store it for use later
+        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
+        if let label = self.label {
+            label.alpha = 0.0
+            label.run(SKAction.fadeIn(withDuration: 2.0))
+        }
         
+        // Create shape node to use during mouse interaction
+        let w = (self.size.width + self.size.height) * 0.05
+        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
         
-    }
-    func load() {
-        
-        char.size = CGSize(width: 200, height: 30)
-        char.zPosition = 2
-        char.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        char.position = CGPoint(x:0, y:0)
-        self.addChild(char)
-        
+        if let spinnyNode = self.spinnyNode {
+            spinnyNode.lineWidth = 2.5
+            
+            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
+            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
+                                              SKAction.fadeOut(withDuration: 0.5),
+                                              SKAction.removeFromParent()]))
+        }
     }
     
     
