@@ -26,6 +26,7 @@ class JustinsDemo: SKScene {
     
     var xPos = 0.0
     var current = 0
+    var charPosition = 0
     
     
     override func sceneDidLoad() {
@@ -45,12 +46,13 @@ class JustinsDemo: SKScene {
         char.position = CGPoint(x:0, y:-500)
         self.addChild(char)
 
-        
+        left.alpha = 0.3
         left.zPosition = 1
         left.size = CGSize(width: self.size.width/2, height: self.size.height)
         left.anchorPoint = CGPoint(x: 1, y: 0.5)
         left.position = CGPoint(x:0, y:0)
         self.addChild(left)
+        right.alpha = 0.3
         right.zPosition = 1
         right.size = CGSize(width: self.size.width/2, height: self.size.height)
         right.anchorPoint = CGPoint(x: 0, y: 0.5)
@@ -65,20 +67,21 @@ class JustinsDemo: SKScene {
     func tileGenerator(pos: Int) {
         
         let realCurrent = current
-        onScreen[current] = 1
+        charPosition += pos
         
         tiles[current].zPosition = 2
         tiles[current].size = CGSize(width: 210, height: 210)
         tiles[current].anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        tiles[current].position = CGPoint(x:0, y:800)
+        tiles[current].position = CGPoint(x:charPosition * 200, y:800)
         
         self.addChild(tiles[current])
+        
         onScreen[current] = 1
         
-        tiles[current].run(SKAction.sequence([SKAction.moveBy(x: 0, y: -1600, duration: 2.0), SKAction.removeFromParent(), SKAction.run {
+        tiles[current].run(SKAction.sequence([SKAction.moveBy(x: 0, y: -1300, duration: 1.8), SKAction.run {
             self.onScreen[realCurrent] = 0
-            }]))
+            }, SKAction.removeFromParent()]))
  
         
         if current == 10 {
@@ -88,22 +91,30 @@ class JustinsDemo: SKScene {
             current += 1
         }
         
-        run(SKAction.sequence([SKAction.wait(forDuration: 0.3), SKAction.run {
-            self.tileGenerator(pos: 0)
+        run(SKAction.sequence([SKAction.wait(forDuration: 0.25), SKAction.run {
+            
+            self.tileGenerator(pos: self.random())
             
             }]))
+        
+    }
+    func random() -> Int {
+        
+        return Int(arc4random_uniform(3)) - 1
         
     }
     
     func goLeft()  {
         
-        
+        charPosition += 1
         for i in 0..<11{
             
             if onScreen[i] == 1{
                 
-                tiles[i].run(SKAction.moveBy(x: 200, y: 0, duration: 0.05))
-            
+                tiles[i].run(SKAction.moveBy(x: 200, y: 0, duration: 0.0))
+                tiles[i].alpha = 0.0
+                tiles[i].run(SKAction.fadeIn(withDuration: 0.1))
+                
             }
         }
         
@@ -112,11 +123,14 @@ class JustinsDemo: SKScene {
     
     func goRight()  {
         
+        charPosition -= 1
         for i in 0..<11{
             
             if onScreen[i] == 1{
                 
-                tiles[i].run(SKAction.moveBy(x: -200, y: 0, duration: 0.05))
+                tiles[i].run(SKAction.moveBy(x: -200, y: 0, duration: 0.0))
+                tiles[i].alpha = 0.5
+                tiles[i].run(SKAction.fadeIn(withDuration: 0.2))
                 
             }
         }
@@ -180,12 +194,12 @@ class JustinsDemo: SKScene {
         for t in touches {
             if left.contains(t.location(in: self)) {
                 
-                left.alpha = 1.0
+                left.alpha = 0.3
                 
             }
             if right.contains(t.location(in: self)) {
                 
-                right.alpha = 1.0
+                right.alpha = 0.3
                 
             }
             
