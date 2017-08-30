@@ -21,7 +21,11 @@ class JustinsDemo: SKScene {
     let char = SKSpriteNode(imageNamed: "board")
     let left = SKSpriteNode(imageNamed: "left")
     let right = SKSpriteNode(imageNamed: "right")
+    var tiles:[SKSpriteNode] = [SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile"),SKSpriteNode(imageNamed:"tile")]
+    var onScreen:[Int] = [0,0,0,0,0,0,0,0,0,0,0]
+    
     var xPos = 0.0
+    var current = 0
     
     
     override func sceneDidLoad() {
@@ -53,20 +57,71 @@ class JustinsDemo: SKScene {
         right.position = CGPoint(x:0, y:0)
         self.addChild(right)
         
+        tileGenerator(pos: 0)
+        
+        
+        
+    }
+    func tileGenerator(pos: Int) {
+        
+        let realCurrent = current
+        onScreen[current] = 1
+        
+        tiles[current].zPosition = 2
+        tiles[current].size = CGSize(width: 210, height: 210)
+        tiles[current].anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
+        tiles[current].position = CGPoint(x:0, y:800)
+        
+        self.addChild(tiles[current])
+        onScreen[current] = 1
+        
+        tiles[current].run(SKAction.sequence([SKAction.moveBy(x: 0, y: -1600, duration: 2.0), SKAction.removeFromParent(), SKAction.run {
+            self.onScreen[realCurrent] = 0
+            }]))
+ 
+        
+        if current == 10 {
+            current = 0
+        }
+        else{
+            current += 1
+        }
+        
+        run(SKAction.sequence([SKAction.wait(forDuration: 0.3), SKAction.run {
+            self.tileGenerator(pos: 0)
+            
+            }]))
+        
     }
     
     func goLeft()  {
         
-        char.anchorPoint = CGPoint(x: xPos, y: 0.5)
-        char.run(SKAction.rotate(byAngle: -CGFloat(Double.pi), duration: 0.1))
-
+        
+        for i in 0..<11{
+            
+            if onScreen[i] == 1{
+                
+                tiles[i].run(SKAction.moveBy(x: 200, y: 0, duration: 0.05))
+            
+            }
+        }
+        
         
     }
     
     func goRight()  {
         
-        char.anchorPoint = CGPoint(x: xPos, y: 0.5)
-        char.run(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0.1))
+        for i in 0..<11{
+            
+            if onScreen[i] == 1{
+                
+                tiles[i].run(SKAction.moveBy(x: -200, y: 0, duration: 0.05))
+                
+            }
+        }
+        
+
 
 
     }
