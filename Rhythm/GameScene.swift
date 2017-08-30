@@ -31,10 +31,10 @@ class GameScene: SKScene {
     }
     func load() {
         
-        char.size = CGSize(width: 200, height: 30)
+        char.size = CGSize(width: 150, height: 23)
         char.zPosition = 2
         char.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        char.position = CGPoint(x:0, y:0)
+        char.position = CGPoint(x:0, y:-500)
         self.addChild(char)
         
     }
