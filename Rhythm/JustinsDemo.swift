@@ -73,16 +73,15 @@ class JustinsDemo: SKScene {
         tiles[current].size = CGSize(width: 210, height: 210)
         tiles[current].anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        tiles[current].position = CGPoint(x:charPosition * 200, y:800)
+        tiles[current].position = CGPoint(x:charPosition * 200, y:600)
+        self.onScreen[self.current] = 1
         
-        self.addChild(tiles[current])
         
-        onScreen[current] = 1
-        
-        tiles[current].run(SKAction.sequence([SKAction.moveBy(x: 0, y: -1300, duration: 1.8), SKAction.run {
+        tiles[current].run(SKAction.sequence([SKAction.moveBy(x: 0, y: -1300, duration: 1.8), SKAction.removeFromParent(), SKAction.run {
             self.onScreen[realCurrent] = 0
-            }, SKAction.removeFromParent()]))
- 
+            }]))
+        self.addChild(tiles[current])
+    
         
         if current == 10 {
             current = 0
@@ -98,6 +97,7 @@ class JustinsDemo: SKScene {
             }]))
         
     }
+    
     func random() -> Int {
         
         return Int(arc4random_uniform(3)) - 1
@@ -111,12 +111,13 @@ class JustinsDemo: SKScene {
             
             if onScreen[i] == 1{
                 
-                tiles[i].run(SKAction.moveBy(x: 200, y: 0, duration: 0.0))
-                tiles[i].alpha = 0.0
-                tiles[i].run(SKAction.fadeIn(withDuration: 0.1))
+                tiles[i].run(SKAction.moveBy(x: 200, y: 0, duration: 0.01))
+             
+           
                 
             }
         }
+        
         
         
     }
@@ -128,9 +129,10 @@ class JustinsDemo: SKScene {
             
             if onScreen[i] == 1{
                 
-                tiles[i].run(SKAction.moveBy(x: -200, y: 0, duration: 0.0))
-                tiles[i].alpha = 0.5
-                tiles[i].run(SKAction.fadeIn(withDuration: 0.2))
+                tiles[i].run(SKAction.moveBy(x: -200, y: 0, duration: 0.01))
+                
+                
+
                 
             }
         }
