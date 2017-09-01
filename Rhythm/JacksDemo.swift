@@ -1,15 +1,17 @@
 //
-//  JustinsDemo
+//  JacksDemo.swift
 //  Rhythm
 //
-//  Created by William Wong on 8/25/17.
+//  Created by Jack Jiang on 8/31/17.
 //  Copyright © 2017 William Wong. All rights reserved.
 //
+
+import Foundation
 
 import SpriteKit
 import GameplayKit
 
-class JustinsDemo: SKScene {
+class JacksDemo: SKScene {
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -26,9 +28,11 @@ class JustinsDemo: SKScene {
     
     var xPos = 0.0
     var current = 0
+    var previous = 0
     
     
     override func sceneDidLoad() {
+        print("Scene LOadddddded")
         self.lastUpdateTime = 0
         self.backgroundColor = SKColor(red: 36/255, green: 46/255, blue: 48/255, alpha: 1.0)
         
@@ -43,7 +47,6 @@ class JustinsDemo: SKScene {
         char.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         char.position = CGPoint(x:0, y:-500)
         self.addChild(char)
-
         
         left.zPosition = 1
         left.size = CGSize(width: self.size.width/2, height: self.size.height)
@@ -58,10 +61,14 @@ class JustinsDemo: SKScene {
         
         tileGenerator(pos: 0)
         
-        
-        
     }
     func tileGenerator(pos: Int) {
+        var randomPosition = 0
+        if current != 0 {
+            previous = current - 1
+            randomPosition = (Int(arc4random_uniform(3)) - 1) * Int(tiles[current].size.width + tiles[previous].position.x)
+        }
+        
         
         let realCurrent = current
         onScreen[current] = 1
@@ -70,18 +77,19 @@ class JustinsDemo: SKScene {
         tiles[current].size = CGSize(width: 210, height: 210)
         tiles[current].anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        tiles[current].position = CGPoint(x:0, y:800)
-        
+        tiles[current].position = CGPoint(x:randomPosition, y:800)
+        print("random Position: " + String(randomPosition))
+        print("random Position: ------------------")
         self.addChild(tiles[current])
         onScreen[current] = 1
         
         tiles[current].run(SKAction.sequence([SKAction.moveBy(x: 0, y: -1600, duration: 2.0), SKAction.removeFromParent(), SKAction.run {
             self.onScreen[realCurrent] = 0
             }]))
- 
         
         if current == 10 {
             current = 0
+            previous = 10
         }
         else{
             current += 1
@@ -89,40 +97,24 @@ class JustinsDemo: SKScene {
         
         run(SKAction.sequence([SKAction.wait(forDuration: 0.3), SKAction.run {
             self.tileGenerator(pos: 0)
-            
             }]))
         
     }
     
     func goLeft()  {
-        
-        
         for i in 0..<11{
-            
             if onScreen[i] == 1{
-                
                 tiles[i].run(SKAction.moveBy(x: 200, y: 0, duration: 0.05))
-            
             }
         }
-        
-        
     }
     
     func goRight()  {
-        
         for i in 0..<11{
-            
             if onScreen[i] == 1{
-                
                 tiles[i].run(SKAction.moveBy(x: -200, y: 0, duration: 0.05))
-                
             }
         }
-        
-
-
-
     }
     
     func touchDown(atPoint pos : CGPoint) {
