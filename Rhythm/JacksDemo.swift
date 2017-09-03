@@ -6,6 +6,8 @@
 //  Copyright © 2017 William Wong. All rights reserved.
 //
 
+//TODO: Add a red tile catching up to the player depending on the time
+
 import Foundation
 
 import SpriteKit
@@ -53,9 +55,13 @@ class JacksDemo: SKScene {
             count += 1
         }
         
-        print(arrayOfNumbers)
-        
         self.addChild(tileMaster)
+        
+        //load the scoreNode
+        scoreNode.text = String(score)
+        scoreNode.color = UIColor.white
+        scoreNode.position = CGPoint(x:300 ,y: 600)
+        self.addChild(scoreNode)
     }
     
     //move
@@ -103,8 +109,10 @@ class JacksDemo: SKScene {
             return
         }
         
+        //initialize tile
         let tile = SKSpriteNode(color: UIColor.green, size: CGSize(width: 10, height: 10))
         
+        //check to see if tile should be spawned to the left or right
         if arrayOfNumbers.last! == 1 {
             //right
             tile.position = CGPoint(x: (tileMaster.children.last?.position)!.x + 10, y:((tileMaster.children.last?.position)!.y + 10))
@@ -115,19 +123,22 @@ class JacksDemo: SKScene {
         
         tileMaster.addChild(tile)
         
+        //if there are more than 200 tiles, remove tiles from bottom
         if tileMaster.children.count > 200 {
             tileMaster.children.first?.removeFromParent()
         }
     }
     
+    //pressed correct side
     func success() {
+        //update score
         score += 1
-        //print("score: " + String(score))
+        scoreNode.text = String(score)
         
         (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .white
     }
     
-    //if tile is missed
+    //pressed wrong side
     func lose() {
         //print("you lose")
     }
@@ -138,6 +149,10 @@ class JacksDemo: SKScene {
             //print(""t)
             move(location: t.location(in: self))
         }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        
     }
     
 }
