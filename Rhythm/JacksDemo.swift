@@ -16,7 +16,10 @@ class JacksDemo: SKScene {
     var player = SKSpriteNode()
     var tileMaster = SKNode()
     var arrayOfNumbers: [Int] = [-1]
-    var currentPosition = 0
+    var currentNumberPosition = 0
+    var currentTilePosition = 0
+    
+    var scoreNode = SKLabelNode()
     var score = 0
     
     override func sceneDidLoad() {
@@ -59,8 +62,8 @@ class JacksDemo: SKScene {
     func move(location: CGPoint) {
         if (location.x <= 0) {
             //move left
-            print("moved left")
-            if arrayOfNumbers[currentPosition] != 1 {
+            //print("moved left")
+            if arrayOfNumbers[currentNumberPosition] != 1 {
                 success()
             } else {
                 lose()
@@ -68,8 +71,8 @@ class JacksDemo: SKScene {
             
         } else {
             //move right
-            print("moved right")
-            if arrayOfNumbers[currentPosition] != 0 {
+            //print("moved right")
+            if arrayOfNumbers[currentNumberPosition] != 0 {
                 success()
             } else {
                 lose()
@@ -78,15 +81,19 @@ class JacksDemo: SKScene {
         }
         generate()
         spawnTile()
-        currentPosition += 1
-        print(arrayOfNumbers)
+        currentNumberPosition += 1
+        if currentTilePosition != 99 {
+            currentTilePosition += 1
+            
+        }
+        print(currentTilePosition)
+        
+        print(tileMaster.children.count)
         tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - 10)
     }
     
     //generate tiles
     func spawnTile() {
-        
-        print(arrayOfNumbers.last)
         
         //very first tile
         if tileMaster.children.count == 0 {
@@ -107,18 +114,22 @@ class JacksDemo: SKScene {
         }
         
         tileMaster.addChild(tile)
+        
+        if tileMaster.children.count > 200 {
+            tileMaster.children.first?.removeFromParent()
+        }
     }
     
     func success() {
         score += 1
-        print("score: " + String(score))
+        //print("score: " + String(score))
         
-        (tileMaster.children[currentPosition] as! SKSpriteNode).color = .white
+        (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .white
     }
     
     //if tile is missed
     func lose() {
-        print("you lose")
+        //print("you lose")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
