@@ -16,11 +16,15 @@ import GameplayKit
 class JacksDemo: SKScene {
     
     //var player = SKSpriteNode()
+    var playerStarted: Bool = false
     
     var tileMaster = SKNode()
     var arrayOfNumbers: [Int] = [-1]
     var currentNumberPosition = 0
     var currentTilePosition = 0
+    //position per second
+    var currentCatcherPosition = 0
+    var catcherSpeed = 0
     var tileSize: CGFloat = 50
     
     var scoreNode = SKLabelNode()
@@ -41,6 +45,7 @@ class JacksDemo: SKScene {
     func load() {
         //add the first tile
         spawnTile()
+        catcherSpeed = 1
         
         //generate 50 numbers and tiles
         var count = 0
@@ -164,7 +169,39 @@ class JacksDemo: SKScene {
         
     }
     
+    var time: TimeInterval = 0
+    var startTime: TimeInterval = 0
+    var second = 0
+    
     override func update(_ currentTime: TimeInterval) {
+        
+        //intiate the start time
+        if startTime == 0 {
+            startTime = currentTime
+        }
+        
+        time = (currentTime - startTime)
+        
+        //this function happens every second
+        if (Int(floor(Double(time))) > second) {
+            second += 1
+            
+            //If player started, then the catcher starts moving
+            if playerStarted {
+                currentCatcherPosition += catcherSpeed
+            }
+        }
+        
+        //if the player tapped the screen, start the timer
+        if currentNumberPosition != 0 {
+            
+            //wait 2 seconds and go
+            if second > 1 {
+                playerStarted = true
+            }
+            
+        }
+        
         
     }
     
