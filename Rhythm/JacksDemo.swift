@@ -21,7 +21,7 @@ class JacksDemo: SKScene {
     var arrayOfNumbers: [Int] = [-1]
     var currentNumberPosition = 0
     var currentTilePosition = 0
-    var tileSize: CGFloat = 20
+    var tileSize: CGFloat = 50
     
     var scoreNode = SKLabelNode()
     var score = 0
@@ -77,6 +77,8 @@ class JacksDemo: SKScene {
                 lose()
             }
             
+            tileMaster.position = CGPoint(x: tileMaster.position.x - 10,y: tileMaster.position.y - tileSize)
+            
         } else {
             //move right
             //print("moved right")
@@ -85,6 +87,8 @@ class JacksDemo: SKScene {
             } else {
                 lose()
             }
+            
+            tileMaster.position = CGPoint(x: tileMaster.position.x + 10,y: tileMaster.position.y - tileSize)
             
         }
         generate()
@@ -97,7 +101,7 @@ class JacksDemo: SKScene {
         print(currentTilePosition)
         
         print(tileMaster.children.count)
-        tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+        //tileMaster.position = CGPoint(x: tileMaster.position.x ,y: tileMaster.position.y - tileSize)
     }
     
     //generate tiles
