@@ -68,27 +68,32 @@ class JacksDemo: SKScene {
     
     //move
     func move(location: CGPoint) {
+        
+        if (arrayOfNumbers[currentNumberPosition] == 0) {
+            tileMaster.position = CGPoint(x: tileMaster.position.x + tileSize,y: tileMaster.position.y - tileSize)
+        } else if (arrayOfNumbers[currentNumberPosition] == 1) {
+            tileMaster.position = CGPoint(x: tileMaster.position.x - tileSize,y: tileMaster.position.y - tileSize)
+        } else if (arrayOfNumbers[currentNumberPosition] == -1) {
+            tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+        }
+        
         if (location.x <= 0) {
             //move left
             //print("moved left")
-            if arrayOfNumbers[currentNumberPosition] != 1 {
-                success()
+            if arrayOfNumbers[currentNumberPosition] == 0 {
+                success(direction: "left")
             } else {
                 lose()
             }
-            
-            tileMaster.position = CGPoint(x: tileMaster.position.x + tileSize,y: tileMaster.position.y - tileSize)
             
         } else {
             //move right
             //print("moved right")
-            if arrayOfNumbers[currentNumberPosition] != 0 {
-                success()
+            if arrayOfNumbers[currentNumberPosition] == 1 {
+                success(direction: "right")
             } else {
                 lose()
             }
-            
-            tileMaster.position = CGPoint(x: tileMaster.position.x - tileSize,y: tileMaster.position.y - tileSize)
             
         }
         generate()
@@ -136,12 +141,17 @@ class JacksDemo: SKScene {
     }
     
     //pressed correct side
-    func success() {
+    func success(direction: String) {
         //update score
         score += 1
         scoreNode.text = String(score)
         
         (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .white
+        
+        //left or right
+        
+        
+        
     }
     
     //pressed wrong side
