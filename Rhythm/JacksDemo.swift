@@ -21,7 +21,7 @@ class JacksDemo: SKScene {
     var arrayOfNumbers: [Int] = [-1]
     var currentNumberPosition = 0
     var currentTilePosition = 0
-    var tileSize: CGFloat = 70
+    var tileSize: CGFloat = 100
     
     var scoreNode = SKLabelNode()
     var score = 0
@@ -67,7 +67,7 @@ class JacksDemo: SKScene {
 
         player.color = UIColor.gray
         player.size = CGSize(width: 30, height: 30)
-        player.position = CGPoint(x: 0 ,y: 0)
+        player.position = CGPoint(x: 0 ,y: -200)
         self.addChild(scoreNode)
         self.addChild(player)
     }
@@ -118,7 +118,7 @@ class JacksDemo: SKScene {
         
         print(tileMaster.children.count)
         
-        player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 30, duration: 0.075),SKAction.moveBy(x: 0, y: -30, duration: 0.075)]))
+        player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.075),SKAction.moveBy(x: 0, y: -80, duration: 0.075)]))
         //tileMaster.position = CGPoint(x: tileMaster.position.x ,y: tileMaster.position.y - tileSize)
     }
     
@@ -128,7 +128,7 @@ class JacksDemo: SKScene {
         //very first tile
         if tileMaster.children.count == 0 {
             let startTile = SKSpriteNode(color: UIColor.red, size: CGSize(width: tileSize, height: tileSize))
-            startTile.position = CGPoint(x: 0 ,y: 0)
+            startTile.position = CGPoint(x: 0 ,y: -200)
             tileMaster.addChild(startTile)
             return
         }
