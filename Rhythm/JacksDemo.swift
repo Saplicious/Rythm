@@ -77,7 +77,7 @@ class JacksDemo: SKScene {
                 lose()
             }
             
-            tileMaster.position = CGPoint(x: tileMaster.position.x - 10,y: tileMaster.position.y - tileSize)
+            tileMaster.position = CGPoint(x: tileMaster.position.x + tileSize,y: tileMaster.position.y - tileSize)
             
         } else {
             //move right
@@ -88,7 +88,7 @@ class JacksDemo: SKScene {
                 lose()
             }
             
-            tileMaster.position = CGPoint(x: tileMaster.position.x + 10,y: tileMaster.position.y - tileSize)
+            tileMaster.position = CGPoint(x: tileMaster.position.x - tileSize,y: tileMaster.position.y - tileSize)
             
         }
         generate()
