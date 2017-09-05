@@ -114,14 +114,14 @@ class JacksDemo: SKScene {
         
         //very first tile
         if tileMaster.children.count == 0 {
-            let startTile = SKSpriteNode(color: UIColor.red, size: CGSize(width: tileSize, height: tileSize))
+            let startTile = SKSpriteNode(color: UIColor.blue, size: CGSize(width: tileSize, height: tileSize))
             startTile.position = CGPoint(x: 0 ,y: 0)
             tileMaster.addChild(startTile)
             return
         }
         
         //initialize tile
-        let tile = SKSpriteNode(color: UIColor.green, size: CGSize(width: tileSize, height: tileSize))
+        let tile = SKSpriteNode(color: UIColor.white, size: CGSize(width: tileSize, height: tileSize))
         
         //check to see if tile should be spawned to the left or right
         if arrayOfNumbers.last! == 1 {
@@ -146,13 +146,14 @@ class JacksDemo: SKScene {
         score += 1
         scoreNode.text = String(score)
         
-        (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .white
+        (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .green
         
     }
     
     //pressed wrong side
     func lose() {
         //print("you lose")
+        (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .red
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
