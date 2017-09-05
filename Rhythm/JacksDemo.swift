@@ -81,7 +81,7 @@ class JacksDemo: SKScene {
             //move left
             //print("moved left")
             if arrayOfNumbers[currentNumberPosition] == 0 {
-                success(direction: "left")
+                success()
             } else {
                 lose()
             }
@@ -90,7 +90,7 @@ class JacksDemo: SKScene {
             //move right
             //print("moved right")
             if arrayOfNumbers[currentNumberPosition] == 1 {
-                success(direction: "right")
+                success()
             } else {
                 lose()
             }
@@ -141,16 +141,12 @@ class JacksDemo: SKScene {
     }
     
     //pressed correct side
-    func success(direction: String) {
+    func success() {
         //update score
         score += 1
         scoreNode.text = String(score)
         
         (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .white
-        
-        //left or right
-        
-        
         
     }
     
