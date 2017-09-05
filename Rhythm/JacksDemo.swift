@@ -85,7 +85,7 @@ class JacksDemo: SKScene {
             
         } else if (arrayOfNumbers[currentNumberPosition] == -1) {
             //tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
-            tileMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
+            
         }
         
         if (location.x <= 0) {
@@ -117,6 +117,8 @@ class JacksDemo: SKScene {
         print(currentTilePosition)
         
         print(tileMaster.children.count)
+        
+        player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 30, duration: 0.075),SKAction.moveBy(x: 0, y: -30, duration: 0.075)]))
         //tileMaster.position = CGPoint(x: tileMaster.position.x ,y: tileMaster.position.y - tileSize)
     }
     
