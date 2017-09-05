@@ -15,11 +15,13 @@ import GameplayKit
 
 class JacksDemo: SKScene {
     
-    var player = SKSpriteNode()
+    //var player = SKSpriteNode()
+    
     var tileMaster = SKNode()
     var arrayOfNumbers: [Int] = [-1]
     var currentNumberPosition = 0
     var currentTilePosition = 0
+    var tileSize: CGFloat = 20
     
     var scoreNode = SKLabelNode()
     var score = 0
@@ -95,7 +97,7 @@ class JacksDemo: SKScene {
         print(currentTilePosition)
         
         print(tileMaster.children.count)
-        tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - 10)
+        tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
     }
     
     //generate tiles
@@ -103,22 +105,22 @@ class JacksDemo: SKScene {
         
         //very first tile
         if tileMaster.children.count == 0 {
-            let startTile = SKSpriteNode(color: UIColor.red, size: CGSize(width: 10, height: 10))
+            let startTile = SKSpriteNode(color: UIColor.red, size: CGSize(width: tileSize, height: tileSize))
             startTile.position = CGPoint(x: 0 ,y: 0)
             tileMaster.addChild(startTile)
             return
         }
         
         //initialize tile
-        let tile = SKSpriteNode(color: UIColor.green, size: CGSize(width: 10, height: 10))
+        let tile = SKSpriteNode(color: UIColor.green, size: CGSize(width: tileSize, height: tileSize))
         
         //check to see if tile should be spawned to the left or right
         if arrayOfNumbers.last! == 1 {
             //right
-            tile.position = CGPoint(x: (tileMaster.children.last?.position)!.x + 10, y:((tileMaster.children.last?.position)!.y + 10))
+            tile.position = CGPoint(x: (tileMaster.children.last?.position)!.x + tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
         } else if arrayOfNumbers.last! == 0 {
             //left
-            tile.position = CGPoint(x: (tileMaster.children.last?.position)!.x - 10, y:((tileMaster.children.last?.position)!.y + 10))
+            tile.position = CGPoint(x: (tileMaster.children.last?.position)!.x - tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
         }
         
         tileMaster.addChild(tile)
@@ -149,6 +151,7 @@ class JacksDemo: SKScene {
             //print(""t)
             move(location: t.location(in: self))
         }
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
