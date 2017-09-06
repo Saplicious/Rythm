@@ -42,6 +42,7 @@ class JacksDemo: SKScene {
     func load() {
         //add the first tile
         spawnTile()
+        catcherSpeed = 1
         
         //generate 50 numbers and tiles
         var count = 0
@@ -92,7 +93,7 @@ class JacksDemo: SKScene {
             //move left
             //print("moved left")
             if arrayOfNumbers[currentNumberPosition] == 0 {
-                success(direction: "left")
+                success()
             } else {
                 lose()
             }
@@ -101,7 +102,7 @@ class JacksDemo: SKScene {
             //move right
             //print("moved right")
             if arrayOfNumbers[currentNumberPosition] == 1 {
-                success(direction: "right")
+                success()
             } else {
                 lose()
             }
@@ -154,16 +155,12 @@ class JacksDemo: SKScene {
     }
     
     //pressed correct side
-    func success(direction: String) {
+    func success() {
         //update score
         score += 1
         scoreNode.text = String(score)
         
         (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .white
-        
-        //left or right
-        
-        
         
     }
     
@@ -182,7 +179,39 @@ class JacksDemo: SKScene {
         
     }
     
+    var time: TimeInterval = 0
+    var startTime: TimeInterval = 0
+    var second = 0
+    
     override func update(_ currentTime: TimeInterval) {
+        
+        //intiate the start time
+        if startTime == 0 {
+            startTime = currentTime
+        }
+        
+        time = (currentTime - startTime)
+        
+        //this function happens every second
+        if (Int(floor(Double(time))) > second) {
+            second += 1
+            
+            //If player started, then the catcher starts moving
+            if playerStarted {
+                currentCatcherPosition += catcherSpeed
+            }
+        }
+        
+        //if the player tapped the screen, start the timer
+        if currentNumberPosition != 0 {
+            
+            //wait 2 seconds and go
+            if second > 1 {
+                playerStarted = true
+            }
+            
+        }
+        
         
     }
     
