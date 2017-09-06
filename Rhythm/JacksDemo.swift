@@ -16,11 +16,15 @@ import GameplayKit
 class JacksDemo: SKScene {
     
     //var player = SKSpriteNode()
+    var playerStarted: Bool = false
     
     var tileMaster = SKNode()
     var arrayOfNumbers: [Int] = [-1]
     var currentNumberPosition = 0
     var currentTilePosition = 0
+    //position per second
+    var currentCatcherPosition = 0
+    var catcherSpeed = 0
     var tileSize: CGFloat = 50
     
     var scoreNode = SKLabelNode()
@@ -36,11 +40,13 @@ class JacksDemo: SKScene {
         let rn = Int(arc4random_uniform(2))
         arrayOfNumbers.append(rn)
     }
+    //FALL OFF DELAY << SUGGESTION
     
     //once the scene loads
     func load() {
         //add the first tile
         spawnTile()
+        catcherSpeed = 1
         
         //generate 50 numbers and tiles
         var count = 0
@@ -63,18 +69,28 @@ class JacksDemo: SKScene {
         scoreNode.text = String(score)
         scoreNode.color = UIColor.white
         scoreNode.position = CGPoint(x:300 ,y: 600)
+
+        player.color = UIColor.gray
+        player.size = CGSize(width: 30, height: 30)
+        player.position = CGPoint(x: 0 ,y: -200)
         self.addChild(scoreNode)
+        self.addChild(player)
     }
     
     //move
     func move(location: CGPoint) {
         
         if (arrayOfNumbers[currentNumberPosition] == 0) {
-            tileMaster.position = CGPoint(x: tileMaster.position.x + tileSize,y: tileMaster.position.y - tileSize)
+            //tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+            tileMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.15))
+            
         } else if (arrayOfNumbers[currentNumberPosition] == 1) {
-            tileMaster.position = CGPoint(x: tileMaster.position.x - tileSize,y: tileMaster.position.y - tileSize)
+            //tileMaster.position = CGPoint(x: tileMaster.position.x - tileSize,y: tileMaster.position.y - tileSize)
+            tileMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
+            
         } else if (arrayOfNumbers[currentNumberPosition] == -1) {
-            tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+            //tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+            
         }
         
         if (location.x <= 0) {
@@ -106,6 +122,8 @@ class JacksDemo: SKScene {
         print(currentTilePosition)
         
         print(tileMaster.children.count)
+        
+        player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.075),SKAction.moveBy(x: 0, y: -80, duration: 0.075)]))
         //tileMaster.position = CGPoint(x: tileMaster.position.x ,y: tileMaster.position.y - tileSize)
     }
     
@@ -165,7 +183,43 @@ class JacksDemo: SKScene {
         
     }
     
+    var time: TimeInterval = 0
+    var startTime: TimeInterval = 0
+    var second = 0
+    
     override func update(_ currentTime: TimeInterval) {
+        
+        //intiate the start time
+        if startTime == 0 {
+            startTime = currentTime
+        }
+        
+        time = (currentTime - startTime)
+        
+        //this function happens every second
+        if (Int(floor(Double(time))) > second) {
+            second += 1
+            
+            //If player started, then the catcher starts moving
+            if playerStarted {
+                currentCatcherPosition += catcherSpeed
+            }
+            
+            if currentCatcherPosition > currentNumberPosition {
+                lose()
+            }
+        }
+        
+        //if the player tapped the screen, start the timer
+        if currentNumberPosition != 0 {
+            
+            //wait 2 seconds and go
+            if second > 1 {
+                playerStarted = true
+            }
+            
+        }
+        
         
     }
     
