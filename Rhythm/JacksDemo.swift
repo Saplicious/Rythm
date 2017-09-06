@@ -15,7 +15,7 @@ import GameplayKit
 
 class JacksDemo: SKScene {
     
-    //var player = SKSpriteNode()
+    var player = SKSpriteNode()
     var playerStarted: Bool = false
     
     var tileMaster = SKNode()
@@ -63,6 +63,7 @@ class JacksDemo: SKScene {
             count += 1
         }
         
+        tileMaster.position = CGPoint(x:0, y: -200)
         self.addChild(tileMaster)
         
         //load the scoreNode
@@ -195,6 +196,8 @@ class JacksDemo: SKScene {
         }
         
         time = (currentTime - startTime)
+        
+        (tileMaster.children[currentCatcherPosition] as! SKSpriteNode).color = .blue
         
         //this function happens every second
         if (Int(floor(Double(time))) > second) {
