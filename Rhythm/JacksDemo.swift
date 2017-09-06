@@ -40,6 +40,7 @@ class JacksDemo: SKScene {
         let rn = Int(arc4random_uniform(2))
         arrayOfNumbers.append(rn)
     }
+    //FALL OFF DELAY << SUGGESTION
     
     //once the scene loads
     func load() {
@@ -68,18 +69,28 @@ class JacksDemo: SKScene {
         scoreNode.text = String(score)
         scoreNode.color = UIColor.white
         scoreNode.position = CGPoint(x:300 ,y: 600)
+
+        player.color = UIColor.gray
+        player.size = CGSize(width: 30, height: 30)
+        player.position = CGPoint(x: 0 ,y: 0)
         self.addChild(scoreNode)
+        self.addChild(player)
     }
     
     //move
     func move(location: CGPoint) {
         
         if (arrayOfNumbers[currentNumberPosition] == 0) {
-            tileMaster.position = CGPoint(x: tileMaster.position.x + tileSize,y: tileMaster.position.y - tileSize)
+            //tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+            tileMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.15))
+            
         } else if (arrayOfNumbers[currentNumberPosition] == 1) {
-            tileMaster.position = CGPoint(x: tileMaster.position.x - tileSize,y: tileMaster.position.y - tileSize)
+            //tileMaster.position = CGPoint(x: tileMaster.position.x - tileSize,y: tileMaster.position.y - tileSize)
+            tileMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
+            
         } else if (arrayOfNumbers[currentNumberPosition] == -1) {
-            tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+            //tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+            tileMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
         }
         
         if (location.x <= 0) {
@@ -158,6 +169,7 @@ class JacksDemo: SKScene {
     //pressed wrong side
     func lose() {
         //print("you lose")
+        (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .red
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
