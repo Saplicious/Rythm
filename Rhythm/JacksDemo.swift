@@ -72,7 +72,7 @@ class JacksDemo: SKScene {
 
         player.color = UIColor.gray
         player.size = CGSize(width: 30, height: 30)
-        player.position = CGPoint(x: 0 ,y: 0)
+        player.position = CGPoint(x: 0 ,y: -200)
         self.addChild(scoreNode)
         self.addChild(player)
     }
@@ -90,7 +90,7 @@ class JacksDemo: SKScene {
             
         } else if (arrayOfNumbers[currentNumberPosition] == -1) {
             //tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
-            tileMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
+            
         }
         
         if (location.x <= 0) {
@@ -122,6 +122,8 @@ class JacksDemo: SKScene {
         print(currentTilePosition)
         
         print(tileMaster.children.count)
+        
+        player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.075),SKAction.moveBy(x: 0, y: -80, duration: 0.075)]))
         //tileMaster.position = CGPoint(x: tileMaster.position.x ,y: tileMaster.position.y - tileSize)
     }
     
@@ -131,7 +133,7 @@ class JacksDemo: SKScene {
         //very first tile
         if tileMaster.children.count == 0 {
             let startTile = SKSpriteNode(color: UIColor.red, size: CGSize(width: tileSize, height: tileSize))
-            startTile.position = CGPoint(x: 0 ,y: 0)
+            startTile.position = CGPoint(x: 0 ,y: -200)
             tileMaster.addChild(startTile)
             return
         }
