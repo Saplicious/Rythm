@@ -200,6 +200,10 @@ class JacksDemo: SKScene {
             if playerStarted {
                 currentCatcherPosition += catcherSpeed
             }
+            
+            if currentCatcherPosition > currentNumberPosition {
+                lose()
+            }
         }
         
         //if the player tapped the screen, start the timer
