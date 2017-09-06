@@ -15,12 +15,16 @@ import GameplayKit
 
 class JacksDemo: SKScene {
     
+    //var player = SKSpriteNode()
+    var playerStarted: Bool = false
     var player = SKSpriteNode()
-    
     var tileMaster = SKNode()
     var arrayOfNumbers: [Int] = [-1]
     var currentNumberPosition = 0
     var currentTilePosition = 0
+    //position per second
+    var currentCatcherPosition = 0
+    var catcherSpeed = 0
     var tileSize: CGFloat = 100
     
     var scoreNode = SKLabelNode()
@@ -67,7 +71,7 @@ class JacksDemo: SKScene {
         scoreNode.position = CGPoint(x:300 ,y: 600)
 
         player.color = UIColor.gray
-        player.size = CGSize(width: 30, height: 30)
+        player.size = CGSize(width: 100, height: 100)
         player.position = CGPoint(x: 0 ,y: -200)
         self.addChild(scoreNode)
         self.addChild(player)
