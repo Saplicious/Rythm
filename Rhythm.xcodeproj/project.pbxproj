@@ -17,6 +17,7 @@
 		3D55C3821F512AB50019CA48 /* RhythmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55C3811F512AB50019CA48 /* RhythmTests.swift */; };
 		3D55C38D1F512AB50019CA48 /* RhythmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55C38C1F512AB50019CA48 /* RhythmUITests.swift */; };
 		525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A18B91F56845F000F7C9D /* Images.xcassets */; };
+		EA3E86331F6DA9E3006C671D /* RewardSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86321F6DA9E3006C671D /* RewardSystem.swift */; };
 		EA89273B1F588F99002995B7 /* JacksDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA89273A1F588F99002995B7 /* JacksDemo.swift */; };
 		EA89273D1F589799002995B7 /* JacksDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA89273C1F589799002995B7 /* JacksDemo.sks */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		3D55C38C1F512AB50019CA48 /* RhythmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmUITests.swift; sourceTree = "<group>"; };
 		3D55C38E1F512AB50019CA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		525A18B91F56845F000F7C9D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EA3E86321F6DA9E3006C671D /* RewardSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardSystem.swift; sourceTree = "<group>"; };
 		EA89273A1F588F99002995B7 /* JacksDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JacksDemo.swift; sourceTree = "<group>"; };
 		EA89273C1F589799002995B7 /* JacksDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JacksDemo.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +115,7 @@
 				3D55C3681F512AB50019CA48 /* GameScene.sks */,
 				EA89273A1F588F99002995B7 /* JacksDemo.swift */,
 				EA89273C1F589799002995B7 /* JacksDemo.sks */,
+				EA3E86321F6DA9E3006C671D /* RewardSystem.swift */,
 				3D55C36A1F512AB50019CA48 /* Actions.sks */,
 				3D55C36E1F512AB50019CA48 /* GameViewController.swift */,
 				3D55C3701F512AB50019CA48 /* Main.storyboard */,
@@ -282,6 +285,7 @@
 			files = (
 				3D55C36D1F512AB50019CA48 /* GameScene.swift in Sources */,
 				EA89273B1F588F99002995B7 /* JacksDemo.swift in Sources */,
+				EA3E86331F6DA9E3006C671D /* RewardSystem.swift in Sources */,
 				3D55C36F1F512AB50019CA48 /* GameViewController.swift in Sources */,
 				3D55C3671F512AB50019CA48 /* AppDelegate.swift in Sources */,
 			);

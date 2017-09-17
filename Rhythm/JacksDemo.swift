@@ -20,8 +20,8 @@ class JacksDemo: SKScene {
     
     var tileMaster = SKNode()
     var arrayOfNumbers: [Int] = [-1]
-    var currentNumberPosition = 0
-    var currentTilePosition = 0
+    var currentNumberPosition = 1
+    var currentTilePosition = 1
     //position per second
     var currentCatcherPosition = 0
     var catcherSpeed = 0
@@ -33,6 +33,7 @@ class JacksDemo: SKScene {
     override func sceneDidLoad() {
         load()
         self.backgroundColor = .black
+        print(RewardSystem.sharedInstance.getDate())
     }
     
     //generate numbers 0,1
@@ -116,13 +117,10 @@ class JacksDemo: SKScene {
         generate()
         spawnTile()
         currentNumberPosition += 1
-        if currentTilePosition != 99 {
+        if currentTilePosition != 100 {
             currentTilePosition += 1
             
         }
-        print(currentTilePosition)
-        
-        print(tileMaster.children.count)
         
         player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.075),SKAction.moveBy(x: 0, y: -80, duration: 0.075)]))
         //tileMaster.position = CGPoint(x: tileMaster.position.x ,y: tileMaster.position.y - tileSize)
@@ -169,7 +167,7 @@ class JacksDemo: SKScene {
         
     }
     
-    //pressed wrong side
+    //pressed wrong side or blue tile catches up to the player
     func lose() {
         //print("you lose")
         (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .red
@@ -212,6 +210,8 @@ class JacksDemo: SKScene {
                 lose()
             }
         }
+        
+        
         
         //if the player tapped the screen, start the timer
         if currentNumberPosition != 0 {
