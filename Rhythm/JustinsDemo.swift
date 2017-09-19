@@ -1,19 +1,19 @@
 //
-//  JacksDemo.swift
+//  JustinsDemo.swift
 //  Rhythm
 //
-//  Created by Jack Jiang on 8/31/17.
+//  Created by Justin Li on 9/18/17.
 //  Copyright © 2017 William Wong. All rights reserved.
 //
 
-//TODO: Add a red tile catching up to the player depending on the time
+
 
 import Foundation
 
 import SpriteKit
 import GameplayKit
 
-class JacksDemo: SKScene {
+class JustinsDemo: SKScene {
     
     var player = SKSpriteNode()
     var playerStarted: Bool = false
@@ -33,7 +33,7 @@ class JacksDemo: SKScene {
     var scoreNode = SKLabelNode()
     var score = 0
     //speed of blocks and player moving downwards
-
+    
     
     override func sceneDidLoad() {
         load()
@@ -45,9 +45,9 @@ class JacksDemo: SKScene {
         self.backgroundColor = .brown
     }
     
-    //generate numbers 0,1,2,3
+    //generate numbers 0,1
     func generate() {
-        let rn = Int(arc4random_uniform(4))
+        let rn = Int(arc4random_uniform(2))
         arrayOfNumbers.append(rn)
     }
     //FALL OFF DELAY << SUGGESTION
@@ -89,23 +89,24 @@ class JacksDemo: SKScene {
         player.zPosition = 4
         self.addChild(scoreNode)
         self.addChild(player)
+        
     }
     
     //move
     func move(location: CGPoint) {
         
         if (arrayOfNumbers[currentNumberPosition] == 0) {
-    
+            
             tileMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.15))
             //shadowMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.15))
             
             
         } else if (arrayOfNumbers[currentNumberPosition] == 1) {
-
-
+            
+            
             tileMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
             //shadowMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
-
+            
             
         } else if (arrayOfNumbers[currentNumberPosition] == -1) {
             //tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
@@ -158,36 +159,36 @@ class JacksDemo: SKScene {
         }
         
         //initialize tile
-
+        
         let tile2 = SKSpriteNode(imageNamed: "concrete")
         tile2.size = CGSize(width: tileSize, height: tileSize2)
         
-        let shadow = SKSpriteNode(imageNamed: "shadow")
-        shadow.size = CGSize(width: tileSize + (tileSize * (8/6)), height: tileSize2 + (tileSize * (8/6)))
-        shadow.alpha = 0.3
         
         //check to see if tile should be spawned to the left or right
-        if arrayOfNumbers.last! == 1 {
+        if arrayOfNumbers.last! == 0 {
             //right
             tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x + tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
-            shadow.position = CGPoint(x: (tileMaster.children.last?.position)!.x + tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
+
             
-        } else if arrayOfNumbers.last! == 0 {
+        } else if arrayOfNumbers.last! == 1 {
             //left
             tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x - tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
-            shadow.position = CGPoint(x: (tileMaster.children.last?.position)!.x - tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
+        }
+        else if arrayOfNumbers.last! == 2 {
+            //left
+            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x - tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
+        }
+        else if arrayOfNumbers.last! == 3 {
+            //left
+            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x - tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
         }
         
         tileMaster.addChild(tile2)
-        //shadowMaster.addChild(shadow)
-        
-        //if there are more than 200 tiles, remove tiles from bottom
+
         if tileMaster.children.count > 200 {
             tileMaster.children.first?.removeFromParent()
         }
-        //if shadowMaster.children.count > 200 {
-          //  shadowMaster.children.first?.removeFromParent()
-        //}
+
     }
     
     //pressed correct side
@@ -206,7 +207,7 @@ class JacksDemo: SKScene {
         //print("you lose")
         (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .red
     }
-
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -220,7 +221,7 @@ class JacksDemo: SKScene {
     var time: TimeInterval = 0
     var startTime: TimeInterval = 0
     var second = 0
-
+    
     
     override func update(_ currentTime: TimeInterval) {
         
@@ -244,7 +245,7 @@ class JacksDemo: SKScene {
                 lose()
             }
         }
-
+        
         
         //if the player tapped the screen, start the timer
         if currentNumberPosition != 0 {
