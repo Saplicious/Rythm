@@ -27,11 +27,13 @@ class JustinsDemo: SKScene {
     //position per second
     var currentCatcherPosition = 0
     var catcherSpeed = 0
-    var tileSize: CGFloat = 100
-    var tileSize2: CGFloat = 100
+    var tileSize: CGFloat = 206
+    var tileSize2: CGFloat = 258
     
     var scoreNode = SKLabelNode()
     var score = 0
+    
+    var layer = 1000000
     //speed of blocks and player moving downwards
     
     
@@ -47,7 +49,7 @@ class JustinsDemo: SKScene {
     
     //generate numbers 0,1
     func generate() {
-        let rn = Int(arc4random_uniform(2))
+        let rn = Int(arc4random_uniform(4))
         arrayOfNumbers.append(rn)
     }
     //FALL OFF DELAY << SUGGESTION
@@ -70,6 +72,14 @@ class JustinsDemo: SKScene {
                 // tile goes right
                 spawnTile()
             }
+            else if arrayOfNumbers[count+1] == 2 {
+                // tile goes up
+                spawnTile()
+            }
+            else if arrayOfNumbers[count+1] == 3 {
+                // tile goes down
+                spawnTile()
+            }
             count += 1
         }
         
@@ -85,34 +95,44 @@ class JustinsDemo: SKScene {
         
         player = SKSpriteNode(imageNamed: "player")
         player.size = CGSize(width: 30, height: 37.5)
-        player.position = CGPoint(x: 0 ,y: -180)
-        player.zPosition = 4
+        player.position = CGPoint(x: 0 ,y: -150)
+        
         self.addChild(scoreNode)
         self.addChild(player)
+        
         
     }
     
     //move
     func move(location: CGPoint) {
         
+        
+        
         if (arrayOfNumbers[currentNumberPosition] == 0) {
             
-            tileMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.15))
+            tileMaster.run(SKAction.moveBy(x: (-tileSize / 2) + 2.5, y: -tileSize2 / 3.4, duration: 0.15))
             //shadowMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.15))
             
             
         } else if (arrayOfNumbers[currentNumberPosition] == 1) {
             
             
-            tileMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
+            tileMaster.run(SKAction.moveBy(x: (tileSize / 2) - 2.5, y: -tileSize2 / 3.4, duration: 0.15))
             //shadowMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
             
             
-        } else if (arrayOfNumbers[currentNumberPosition] == -1) {
-            //tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+        } else if (arrayOfNumbers[currentNumberPosition] == 2) {
+            
+            tileMaster.run(SKAction.moveBy(x: -tileSize / 2  + 2.5, y: -tileSize2 / 1.5, duration: 0.15))
+
             
         }
-        
+        else if (arrayOfNumbers[currentNumberPosition] == 3) {
+            
+            tileMaster.run(SKAction.moveBy(x: tileSize / 2 - 2.5, y: 25, duration: 0.15))
+    
+        }
+    
         if (location.x <= 0) {
             //move left
             //print("moved left")
@@ -143,13 +163,18 @@ class JustinsDemo: SKScene {
         
         print(tileMaster.children.count)
         
-        player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.075),SKAction.moveBy(x: 0, y: -80, duration: 0.075)]))
+        player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.075),SKAction.run {
+            self.player.zPosition = CGFloat(self.layer + 208)
+            },SKAction.moveBy(x: 0, y: -80, duration: 0.075)]))
         //tileMaster.position = CGPoint(x: tileMaster.position.x ,y: tileMaster.position.y - tileSize)
+        
+        
     }
     
     //generate tiles
     func spawnTile() {
         
+
         //very first tile
         if tileMaster.children.count == 0 {
             let startTile = SKSpriteNode(color: UIColor.blue, size: CGSize(width: tileSize, height: tileSize2))
@@ -160,30 +185,36 @@ class JustinsDemo: SKScene {
         
         //initialize tile
         
-        let tile2 = SKSpriteNode(imageNamed: "concrete")
+        let tile2 = SKSpriteNode(imageNamed: "block")
         tile2.size = CGSize(width: tileSize, height: tileSize2)
         
         
         //check to see if tile should be spawned to the left or right
         if arrayOfNumbers.last! == 0 {
             //right
-            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x + tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
+            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x + (tileSize/2) - 2.5, y:((tileMaster.children.last?.position)!.y + (tileSize2 / 3.4)))
 
             
-        } else if arrayOfNumbers.last! == 1 {
+        }
+        else if arrayOfNumbers.last! == 1 {
             //left
-            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x - tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
+            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x - (tileSize / 2) + 2.5, y:((tileMaster.children.last?.position)!.y + (tileSize2 / 3.4)))
         }
         else if arrayOfNumbers.last! == 2 {
-            //left
-            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x - tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
+            //up
+            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x + (tileSize / 2) - 2.5, y:((tileMaster.children.last?.position)!.y + (tileSize2/1.5)))
         }
         else if arrayOfNumbers.last! == 3 {
-            //left
-            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x - tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
+            //down
+            tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x - (tileSize / 2) + 2.5, y:((tileMaster.children.last?.position)!.y - 25))
         }
         
+        tile2.zPosition = CGFloat(layer)
+        layer = layer - 2
+        
+        
         tileMaster.addChild(tile2)
+        
 
         if tileMaster.children.count > 200 {
             tileMaster.children.first?.removeFromParent()
@@ -196,9 +227,8 @@ class JustinsDemo: SKScene {
         //update score
         score += 1
         scoreNode.text = String(score)
-        (tileMaster.children[currentTilePosition] as! SKSpriteNode).texture = SKTexture(imageNamed: "concrete")
-        
-        //(tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .green
+        (tileMaster.children[currentTilePosition] as! SKSpriteNode).texture = SKTexture(imageNamed: "block")
+
         
     }
     
