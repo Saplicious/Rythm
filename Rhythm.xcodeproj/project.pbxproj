@@ -19,6 +19,7 @@
 		525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A18B91F56845F000F7C9D /* Images.xcassets */; };
 		52A49B071F70EA0B00985861 /* JustinsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A49B061F70EA0B00985861 /* JustinsDemo.swift */; };
 		52A49B091F70EA2700985861 /* JustinsDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52A49B081F70EA2700985861 /* JustinsDemo.sks */; };
+		52A49B0B1F72418800985861 /* regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52A49B0A1F72418500985861 /* regular.ttf */; };
 		EA89273B1F588F99002995B7 /* JacksDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA89273A1F588F99002995B7 /* JacksDemo.swift */; };
 		EA89273D1F589799002995B7 /* JacksDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA89273C1F589799002995B7 /* JacksDemo.sks */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,8 @@
 		525A18B91F56845F000F7C9D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		52A49B061F70EA0B00985861 /* JustinsDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustinsDemo.swift; sourceTree = "<group>"; };
 		52A49B081F70EA2700985861 /* JustinsDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JustinsDemo.sks; sourceTree = "<group>"; };
+		52A49B0A1F72418500985861 /* regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = regular.ttf; path = ../../../Downloads/Noto_Sans/regular.ttf; sourceTree = "<group>"; };
+		52A49B0C1F72428600985861 /* bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bold.ttf; path = ../../../Downloads/Noto_Sans/bold.ttf; sourceTree = "<group>"; };
 		EA89273A1F588F99002995B7 /* JacksDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JacksDemo.swift; sourceTree = "<group>"; };
 		EA89273C1F589799002995B7 /* JacksDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JacksDemo.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +127,8 @@
 				3D55C3701F512AB50019CA48 /* Main.storyboard */,
 				3D55C3751F512AB50019CA48 /* LaunchScreen.storyboard */,
 				3D55C3781F512AB50019CA48 /* Info.plist */,
+				52A49B0C1F72428600985861 /* bold.ttf */,
+				52A49B0A1F72418500985861 /* regular.ttf */,
 			);
 			path = Rhythm;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 				52A49B091F70EA2700985861 /* JustinsDemo.sks in Resources */,
 				3D55C3691F512AB50019CA48 /* GameScene.sks in Resources */,
 				EA89273D1F589799002995B7 /* JacksDemo.sks in Resources */,
+				52A49B0B1F72418800985861 /* regular.ttf in Resources */,
 				3D55C3771F512AB50019CA48 /* LaunchScreen.storyboard in Resources */,
 				525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */,
 				3D55C36B1F512AB50019CA48 /* Actions.sks in Resources */,
