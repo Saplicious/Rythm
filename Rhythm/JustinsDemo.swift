@@ -91,15 +91,19 @@ class JustinsDemo: SKScene {
         let left = SKSpriteNode(imageNamed: "left")
         left.position = CGPoint(x: -self.size.width * 0.33, y: -self.size.height * 0.33)
         left.zPosition = 100000100
+        left.name = "leftButton"
         let right = SKSpriteNode(imageNamed: "right")
         right.position = CGPoint(x: self.size.width * 0.33, y: -self.size.height * 0.33)
         right.zPosition = 100000100
+        right.name = "rightButton"
         let up = SKSpriteNode(imageNamed: "up")
         up.position = CGPoint(x: self.size.width * 0.20, y: -self.size.height * 0.26)
         up.zPosition = 100000100
+        up.name = "upButton"
         let down = SKSpriteNode(imageNamed: "down")
         down.position = CGPoint(x: -self.size.width * 0.20, y: -self.size.height * 0.40)
         down.zPosition = 100000100
+        down.name = "downButton"
         
         buttonsMaster.addChild(left)
         buttonsMaster.addChild(right)
@@ -189,6 +193,29 @@ class JustinsDemo: SKScene {
                 break
             }
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        for t in touches {
+            for node in self.children {
+                
+                if node.atPoint(t.location(in: self)).name == "upButton" {
+                    print("upButton")
+                    move(location: 2)
+                } else if node.atPoint(t.location(in: self)).name == "downButton" {
+                    print("downButton")
+                    move(location: 3)
+                } else if node.atPoint(t.location(in: self)).name == "rightButton" {
+                    print("rightButton")
+                    move(location: 0)
+                } else if node.atPoint(t.location(in: self)).name == "leftButton" {
+                    print("leftButton")
+                    move(location: 1)
+                }
+            }
+        }
+        
     }
     
     
@@ -377,16 +404,6 @@ class JustinsDemo: SKScene {
             SKAction.animate(with: [b1, b2, b3 ,b4, b5], timePerFrame: 0.05)
             ])
         (tileMaster.children[currentTilePosition] as! SKSpriteNode).run(animate)
-    }
-    
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        //for t in touches {
-            //print(""t)
-            
-        //}
-        
     }
     
     var time: TimeInterval = 0
