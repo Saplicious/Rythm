@@ -195,6 +195,28 @@ class JustinsDemo: SKScene {
         }
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for t in touches {
+            for node in self.children {
+                
+                if node.atPoint(t.location(in: self)).name == "upButton" {
+                    print("upButton")
+                    move(location: 2)
+                } else if node.atPoint(t.location(in: self)).name == "downButton" {
+                    print("downButton")
+                    move(location: 3)
+                } else if node.atPoint(t.location(in: self)).name == "rightButton" {
+                    print("rightButton")
+                    move(location: 0)
+                } else if node.atPoint(t.location(in: self)).name == "leftButton" {
+                    print("leftButton")
+                    move(location: 1)
+                }
+            }
+        }
+
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for t in touches {
