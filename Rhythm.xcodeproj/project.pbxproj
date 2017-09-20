@@ -57,7 +57,7 @@
 		3D55C38C1F512AB50019CA48 /* RhythmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmUITests.swift; sourceTree = "<group>"; };
 		3D55C38E1F512AB50019CA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		525A18B91F56845F000F7C9D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		52A49B061F70EA0B00985861 /* JustinsDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustinsDemo.swift; sourceTree = "<group>"; };
+		52A49B061F70EA0B00985861 /* JustinsDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = JustinsDemo.swift; sourceTree = "<group>"; };
 		52A49B081F70EA2700985861 /* JustinsDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JustinsDemo.sks; sourceTree = "<group>"; };
 		EA89273A1F588F99002995B7 /* JacksDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JacksDemo.swift; sourceTree = "<group>"; };
 		EA89273C1F589799002995B7 /* JacksDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JacksDemo.sks; sourceTree = "<group>"; };
