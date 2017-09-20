@@ -13,23 +13,27 @@ class RewardSystem {
     public static let sharedInstance:RewardSystem = RewardSystem()
     
     var currentDateTime:Date = Date()
-    
     var lastLogonDate = Date()
+    var hasRewardBeenClaimed = false
     
     //reward player every day
     
-    //get date
+    public func rewardPlayer() {
+        
+    }
+    
+    public func getLastLogonDate() -> Date {
+        return lastLogonDate
+    }
+    
+    public func setLastLogonDate(date: Date) {
+        lastLogonDate = date
+    }
+    
     public func getDate() -> Date {
         currentDateTime = Date()
         return currentDateTime
         
     }
-    
-    //store date
-    public func storeDate() {
-        currentDateTime = Date()
-        print(currentDateTime)
-    }
-    
     
 }
