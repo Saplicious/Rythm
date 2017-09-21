@@ -119,8 +119,11 @@
 				52A49B081F70EA2700985861 /* JustinsDemo.sks */,
 				EA89273A1F588F99002995B7 /* JacksDemo.swift */,
 				EA89273C1F589799002995B7 /* JacksDemo.sks */,
+				EA3E86341F6E274C006C671D /* Tile.swift */,
+				EA3E86321F6DA9E3006C671D /* RewardSystem.swift */,
 				3D55C36A1F512AB50019CA48 /* Actions.sks */,
 				3D55C36E1F512AB50019CA48 /* GameViewController.swift */,
+				EA3E86361F70E2F2006C671D /* DataEncoder.swift */,
 				3D55C3701F512AB50019CA48 /* Main.storyboard */,
 				3D55C3751F512AB50019CA48 /* LaunchScreen.storyboard */,
 				3D55C3781F512AB50019CA48 /* Info.plist */,
@@ -292,6 +295,7 @@
 				52A49B071F70EA0B00985861 /* JustinsDemo.swift in Sources */,
 				3D55C36F1F512AB50019CA48 /* GameViewController.swift in Sources */,
 				3D55C3671F512AB50019CA48 /* AppDelegate.swift in Sources */,
+				EA3E86371F70E2F2006C671D /* DataEncoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

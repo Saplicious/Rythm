@@ -12,12 +12,14 @@ import Foundation
 
 import SpriteKit
 import GameplayKit
+import os.log
 
 class JacksDemo: SKScene {
     
     var player = SKSpriteNode()
     var playerStarted: Bool = false
     
+    var player = SKSpriteNode()
     var tileMaster = SKNode()
     //var shadowMaster = SKNode()
     
@@ -50,29 +52,21 @@ class JacksDemo: SKScene {
         let rn = Int(arc4random_uniform(4))
         arrayOfNumbers.append(rn)
     }
-    //FALL OFF DELAY << SUGGESTION
     
     //once the scene loads
     func load() {
         //add the first tile
-        spawnTile()
-        catcherSpeed = 1
+        generateTile(maxTileId: 0)
+        //catcherSpeed = 0.0001
         
-        //generate 50 numbers and tiles
+        //generate 100 tiles
         var count = 0
-        for _ in 1...100{
-            generate()
-            if arrayOfNumbers[count+1] == 0 {
-                //tile goes left
-                spawnTile()
-            }
-            else if arrayOfNumbers[count+1] == 1 {
-                // tile goes right
-                spawnTile()
-            }
+        for _ in 1...20{
+            generateTile(maxTileId: 1)
             count += 1
         }
         
+        tileMaster.position = CGPoint(x:0, y: -200)
         self.addChild(tileMaster)
         tileMaster.zPosition = 3
         //self.addChild(shadowMaster)
@@ -107,47 +101,56 @@ class JacksDemo: SKScene {
             //shadowMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
 
             
-        } else if (arrayOfNumbers[currentNumberPosition] == -1) {
-            //tileMaster.position = CGPoint(x: tileMaster.position.x,y: tileMaster.position.y - tileSize)
+        } else if (currentTileId == 1) {
+            tileMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
             
-        }
-        
-        if (location.x <= 0) {
-            //move left
-            //print("moved left")
-            if arrayOfNumbers[currentNumberPosition] == 0 {
+            if location.x > 0 {
                 success()
-            } else {
-                lose()
             }
             
-        } else {
-            //move right
-            //print("moved right")
-            if arrayOfNumbers[currentNumberPosition] == 1 {
-                success()
-            } else {
-                lose()
-            }
+        } else if (currentTileId == -1) {
             
+            success()
+            
+        } else if (currentTileId == 2) {
+            tileMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.15))
+            
+            if location.x <= 0 {
+                success()
+            }
         }
-        generate()
-        spawnTile()
-        currentNumberPosition += 1
-        if currentTilePosition != 99 {
+
+        //which tiles to spawn depending on score
+        switch score {
+        case 20..<200:
+            generateTile(maxTileId: 2)
+        case 200..<1000:
+            generateTile(maxTileId: 1)
+        default:
+            generateTile(maxTileId: 1)
+        }
+        if changecurrentposition {
             currentTilePosition += 1
             
         }
-        print(currentTilePosition)
-        
-        print(tileMaster.children.count)
         
         player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.075),SKAction.moveBy(x: 0, y: -80, duration: 0.075)]))
         //tileMaster.position = CGPoint(x: tileMaster.position.x ,y: tileMaster.position.y - tileSize)
     }
     
+    //generate random tile from numbers 0...maxTileId
+    func generateTile(maxTileId: Int) {
+        let tileId = Int(arc4random_uniform(UInt32(maxTileId+1)))
+        let tile = Tile(color: UIColor.white, size: CGSize(width: tileSize, height: tileSize))
+        
+        tile.setTileId(id: tileId)
+        spawnTile(tile: tile)
+    }
+    
     //generate tiles
-    func spawnTile() {
+    func spawnTile(tile: Tile) {
+        
+        let tileId = tile.getTileId()
         
         //very first tile
         if tileMaster.children.count == 0 {
@@ -167,7 +170,7 @@ class JacksDemo: SKScene {
         shadow.alpha = 0.3
         
         //check to see if tile should be spawned to the left or right
-        if arrayOfNumbers.last! == 1 {
+        if tileId == 1 {
             //right
             tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x + tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
             shadow.position = CGPoint(x: (tileMaster.children.last?.position)!.x + tileSize, y:((tileMaster.children.last?.position)!.y + tileSize))
@@ -184,6 +187,7 @@ class JacksDemo: SKScene {
         //if there are more than 200 tiles, remove tiles from bottom
         if tileMaster.children.count > 200 {
             tileMaster.children.first?.removeFromParent()
+            currentCatcherPosition -= 1
         }
         //if shadowMaster.children.count > 200 {
           //  shadowMaster.children.first?.removeFromParent()
@@ -201,17 +205,37 @@ class JacksDemo: SKScene {
         
     }
     
-    //pressed wrong side
+    //pressed wrong side or blue tile catches up to the player
     func lose() {
-        //print("you lose")
-        (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .red
+        
+        if score > highscore {
+            highscore = score
+        }
+        showMenu()
+        
+        data.setHighScore(hs: highscore)
+        saveData()
+        resetGame()
+    }
+    
+    func resetGame() {
+        tileMaster.removeFromParent()
+        tileMaster = SKNode()
+        score = 0
+        scoreNode.text = String(score)
+        load()
+    }
+    
+    func showMenu() {
+        highScoreNode.text = String(highscore)
+        self.addChild(menu)
     }
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for t in touches {
-            //print(""t)
+            
             move(location: t.location(in: self))
         }
         
@@ -231,26 +255,47 @@ class JacksDemo: SKScene {
         
         time = (currentTime - startTime)
         
+        (tileMaster.children[currentCatcherPosition] as! SKSpriteNode).color = .blue
+        
         //this function happens every second
         if (Int(floor(Double(time))) > second) {
             second += 1
             
-            //If player started, then the catcher starts moving
+            if currentTilePosition != 1 {
+                timeSinceStart += 1
+            }
+        }
+        
+        
+        //happens every 1/60 second
+        if (time > sixty) {
+            sixty += 1/60
+            
             if playerStarted {
-                currentCatcherPosition += catcherSpeed
+                catcherUpdate += catcherSpeed
+                if (catcherUpdate > 1){
+                    currentCatcherPosition += 1
+                    catcherUpdate = 0.0
+                }
             }
             
-            if currentCatcherPosition > currentNumberPosition {
-                lose()
+            if (currentTilePosition - currentCatcherPosition) > 15 {
+                currentCatcherPosition = currentTilePosition - 15
             }
         }
 
         
+        if currentCatcherPosition >= currentTilePosition {
+            lose()
+        }
+        
         //if the player tapped the screen, start the timer
-        if currentNumberPosition != 0 {
+        if currentTilePosition != 1 {
             
-            //wait 2 seconds and go
-            if second > 1 {
+            menu.removeFromParent()
+            
+            //wait 3 seconds and go
+            if timeSinceStart > 3 {
                 playerStarted = true
             }
             
