@@ -24,6 +24,7 @@
 		EA3E86471F73A3D8006C671D /* JacksDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86421F73A3D8006C671D /* JacksDemo.swift */; };
 		EA3E86481F73A3D8006C671D /* RewardSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86431F73A3D8006C671D /* RewardSystem.swift */; };
 		EA3E86491F73A3D8006C671D /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86441F73A3D8006C671D /* Tile.swift */; };
+		EA3E864D1F73AB09006C671D /* MergedScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E864C1F73AB09006C671D /* MergedScene2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		EA3E86421F73A3D8006C671D /* JacksDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JacksDemo.swift; sourceTree = "<group>"; };
 		EA3E86431F73A3D8006C671D /* RewardSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardSystem.swift; sourceTree = "<group>"; };
 		EA3E86441F73A3D8006C671D /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		EA3E864C1F73AB09006C671D /* MergedScene2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergedScene2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,13 +123,14 @@
 				EA3E86401F73A3D8006C671D /* DataEncoder.swift */,
 				EA3E86411F73A3D8006C671D /* JacksDemo.sks */,
 				EA3E86421F73A3D8006C671D /* JacksDemo.swift */,
+				EA3E864C1F73AB09006C671D /* MergedScene2.swift */,
+				52A49B061F70EA0B00985861 /* JustinsDemo.swift */,
+				52A49B081F70EA2700985861 /* JustinsDemo.sks */,
 				EA3E86431F73A3D8006C671D /* RewardSystem.swift */,
 				EA3E86441F73A3D8006C671D /* Tile.swift */,
 				3D55C3661F512AB50019CA48 /* AppDelegate.swift */,
 				3D55C36C1F512AB50019CA48 /* GameScene.swift */,
 				3D55C3681F512AB50019CA48 /* GameScene.sks */,
-				52A49B061F70EA0B00985861 /* JustinsDemo.swift */,
-				52A49B081F70EA2700985861 /* JustinsDemo.sks */,
 				3D55C36A1F512AB50019CA48 /* Actions.sks */,
 				3D55C36E1F512AB50019CA48 /* GameViewController.swift */,
 				3D55C3701F512AB50019CA48 /* Main.storyboard */,
@@ -300,6 +303,7 @@
 				52A49B071F70EA0B00985861 /* JustinsDemo.swift in Sources */,
 				3D55C36F1F512AB50019CA48 /* GameViewController.swift in Sources */,
 				EA3E86491F73A3D8006C671D /* Tile.swift in Sources */,
+				EA3E864D1F73AB09006C671D /* MergedScene2.swift in Sources */,
 				3D55C3671F512AB50019CA48 /* AppDelegate.swift in Sources */,
 				EA3E86451F73A3D8006C671D /* DataEncoder.swift in Sources */,
 				EA3E86481F73A3D8006C671D /* RewardSystem.swift in Sources */,
