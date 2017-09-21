@@ -13,16 +13,14 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class JustinsDemo: SKScene {
+class MergedScene: SKScene {
     
     var player = SKSpriteNode()
     var playerStarted: Bool = false
-
     
     var tileMaster = SKNode()
     //var shadowMaster = SKNode()
     
-    var arrayOfNumbers: [Int] = [-1]
     var pausedState = false
     var currentNumberPosition = 0
     var currentTilePosition = 0
@@ -41,7 +39,7 @@ class JustinsDemo: SKScene {
     
     var buttonMaster = SKNode()
     
-
+    
     
     //speed of blocks and player moving downwards
     override func didMove(to view: SKView) {
@@ -61,30 +59,27 @@ class JustinsDemo: SKScene {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.view?.addGestureRecognizer(swipeDown)
+        
     }
     
     override func sceneDidLoad() {
         load()
         //add gestures
         addButtons()
-    
+        
         let background = SKSpriteNode(imageNamed: "bg5")
         background.position = CGPoint(x: 0, y: 0)
         background.size = CGSize(width: self.size.width, height: self.size.height)
         background.zPosition = 0
         addChild(background)
         
-        
         ring.position = CGPoint(x: 0, y: 0)
         ring.size = CGSize(width: self.size.width, height: self.size.height)
         ring.zPosition = CGFloat(self.layer + 208)
         addChild(ring)
-
+        
         
         player.zPosition = CGFloat(layer + 1000)
-
-    
-
     }
     func addButtons() {
         
@@ -110,9 +105,9 @@ class JustinsDemo: SKScene {
         
         pausedState = false
         if i == 0{
-        
+            
             move(location: 4)
-        
+            
         }
         buttonMaster.run(SKAction.fadeOut(withDuration: 0.5))
         buttonMaster.run(SKAction.moveBy(x: 0, y: -200, duration: 0.6))
@@ -131,6 +126,27 @@ class JustinsDemo: SKScene {
             arrayOfNumbers.append(rn)
         }
     }
+    //new generate function
+    func generateTile(maxTileId: Int) {
+        let rn = Int(arc4random_uniform(UInt32(maxTileId+1)))
+        let tileId = Int(arc4random_uniform(UInt32(maxTileId+1)))
+        let tile = Tile(color: UIColor.white, size: CGSize(width: tileSize, height: tileSize))
+        
+        if rn == 4 || rn == 6 {
+            tile.setTileId(id: 0)
+        }
+        else if rn == 5 || rn == 7 {
+            tile.setTileId(id: 1)
+        }
+        else {
+            tile.setTileId(id: rn)
+        }
+        
+        tile.setTileId(id: tileId)
+        spawnTile(tile: tile)
+    }
+    
+    
     //FALL OFF DELAY << SUGGESTION
     
     //once the scene loads
@@ -169,7 +185,7 @@ class JustinsDemo: SKScene {
         //shadowMaster.zPosition = 2
         
         //load the scoreNode
-
+        
         
         scoreNode.fontSize = 60
         scoreNode.text = ("\(score)")
@@ -193,22 +209,22 @@ class JustinsDemo: SKScene {
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             if pausedState == false{
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.right:
-                print("Swiped right")
-                move(location: 0)
-            case UISwipeGestureRecognizerDirection.down:
-                print("Swiped down")
-                move(location: 3)
-            case UISwipeGestureRecognizerDirection.left:
-                print("Swiped left")
-                move(location: 1)
-            case UISwipeGestureRecognizerDirection.up:
-                print("Swiped up")
-                move(location: 2)
-            default:
-                print("Swiped up")
-                break
+                switch swipeGesture.direction {
+                case UISwipeGestureRecognizerDirection.right:
+                    print("Swiped right")
+                    move(location: 0)
+                case UISwipeGestureRecognizerDirection.down:
+                    print("Swiped down")
+                    move(location: 3)
+                case UISwipeGestureRecognizerDirection.left:
+                    print("Swiped left")
+                    move(location: 1)
+                case UISwipeGestureRecognizerDirection.up:
+                    print("Swiped up")
+                    move(location: 2)
+                default:
+                    print("Swiped up")
+                    break
                 }
             }
             
@@ -235,7 +251,7 @@ class JustinsDemo: SKScene {
                 }
             }
         }
-
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -250,12 +266,12 @@ class JustinsDemo: SKScene {
         }
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?){
-       
+        
         for touch in touches {
             
             if (buttonMaster.childNode(withName: "play")?.contains(touch.location(in: self)))!{
                 
-
+                
                 buttonMaster.childNode(withName: "play")?.run(SKAction.moveBy(x: 0, y: -500, duration: 0))
                 deleteButtons(i: 0)
                 
@@ -266,84 +282,10 @@ class JustinsDemo: SKScene {
     
     func move(location: Int) {
         
+        let currentTileId = (tileMaster.children[currentTilePosition] as! Tile).getTileId()
         
-        
-        if (arrayOfNumbers[currentNumberPosition] == 0) {
+        if location == 4 {
             
-            tileMaster.run(SKAction.moveBy(x: (-tileSize / 2) + 2.5, y: -tileSize2 / 3.4, duration: 0.20))
-            //shadowMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.20))
-            
-            
-        } else if (arrayOfNumbers[currentNumberPosition] == 1) {
-            
-            
-            tileMaster.run(SKAction.moveBy(x: (tileSize / 2) - 2.5, y: -tileSize2 / 3.4, duration: 0.20))
-            //shadowMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.20))
-            
-            
-        } else if (arrayOfNumbers[currentNumberPosition] == 2) {
-            
-            tileMaster.run(SKAction.moveBy(x: -tileSize / 2  + 2.5, y: -tileSize2 / 1.5, duration: 0.20))
-
-            
-        }
-        else if (arrayOfNumbers[currentNumberPosition] == 3) {
-            
-            tileMaster.run(SKAction.moveBy(x: tileSize / 2 - 2.5, y: 25, duration: 0.20))
-    
-        }
-
-        if player.position.y < 200{
-            
-            
-            player.run(SKAction.moveBy(x: 0, y: 60, duration: 0.20))
-            tileMaster.run(SKAction.moveBy(x: 0, y: 60, duration: 0.20))
-        
-        }
-        else{
-            
-            player.run(SKAction.moveBy(x: 0, y: 10, duration: 0.20))
-            tileMaster.run(SKAction.moveBy(x: 0, y: 10, duration: 0.20))
-        }
-    
-        if location == 0 {
-            //move left
-            print("moved right")
-            if arrayOfNumbers[currentNumberPosition] == 0 {
-                success()
-            } else {
-                lose()
-            }
-            
-        } else if location == 1{
-            //move right
-            print("moved left")
-            if arrayOfNumbers[currentNumberPosition] == 1 {
-                success()
-            } else {
-                lose()
-            }
-            
-        } else if location == 2{
-            //move up
-            print("moved up")
-            if arrayOfNumbers[currentNumberPosition] == 2 {
-                success()
-            } else {
-                lose()
-            }
-            
-        } else if location == 3{
-            //move down
-            print("moved down")
-            if arrayOfNumbers[currentNumberPosition] == 3 {
-                success()
-            } else {
-                lose()
-            }
-            
-        }  else if location == 4{
-
             print("STARTED")
             let b1 = SKTexture(imageNamed: "block")
             let b2 = SKTexture(imageNamed: "dblock1")
@@ -358,7 +300,73 @@ class JustinsDemo: SKScene {
                 ])
             (tileMaster.children[currentTilePosition] as! SKSpriteNode).run(animate)
             
+        } else if (currentTileId == 0) {
             
+            tileMaster.run(SKAction.moveBy(x: (-tileSize / 2) + 2.5, y: -tileSize2 / 3.4, duration: 0.20))
+            //shadowMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.20))
+            
+            if location == 0 {
+                //move right
+                print("moved right")
+                success()
+            }
+            else {
+                lose()
+            }
+            
+        } else if (currentTileId == 1) {
+            
+            
+            tileMaster.run(SKAction.moveBy(x: (tileSize / 2) - 2.5, y: -tileSize2 / 3.4, duration: 0.20))
+            //shadowMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.20))
+            
+            if location == 1 {
+                //move left
+                print("moved left")
+                success()
+            }
+            else {
+                lose()
+            }
+        } else if (currentTileId == 2) {
+            
+            tileMaster.run(SKAction.moveBy(x: -tileSize / 2  + 2.5, y: -tileSize2 / 1.5, duration: 0.20))
+            
+            if location == 2 {
+                //move up
+                print("moved up")
+                success()
+            }
+            else {
+                lose()
+            }
+        }
+        else if (currentTileId == 3) {
+            
+            tileMaster.run(SKAction.moveBy(x: tileSize / 2 - 2.5, y: 25, duration: 0.20))
+            
+            if location == 3 {
+                //move down
+                print("moved down")
+                success()
+            }
+            else {
+                lose()
+            }
+            
+        }
+        
+        if player.position.y < 200{
+            
+            
+            player.run(SKAction.moveBy(x: 0, y: 60, duration: 0.20))
+            tileMaster.run(SKAction.moveBy(x: 0, y: 60, duration: 0.20))
+            
+        }
+        else{
+            
+            player.run(SKAction.moveBy(x: 0, y: 10, duration: 0.20))
+            tileMaster.run(SKAction.moveBy(x: 0, y: 10, duration: 0.20))
         }
         
         generate()
@@ -384,6 +392,7 @@ class JustinsDemo: SKScene {
     //generate tiles
     func spawnTile() {
         
+        
         //very first tile
         if tileMaster.children.count == 0 {
             let tile2 = SKSpriteNode(imageNamed: "block")
@@ -406,6 +415,8 @@ class JustinsDemo: SKScene {
         if arrayOfNumbers.last! == 0 {
             //right
             tile2.position = CGPoint(x: (tileMaster.children.last?.position)!.x + (tileSize/2) - 2.5, y:((tileMaster.children.last?.position)!.y + (tileSize2 / 3.4)))
+            
+            
         }
         else if arrayOfNumbers.last! == 1 {
             //left
@@ -423,13 +434,14 @@ class JustinsDemo: SKScene {
         tile2.zPosition = CGFloat(layer)
         layer = layer - 2
         
+        
         tileMaster.addChild(tile2)
         
-
+        
         if tileMaster.children.count > 200 {
             tileMaster.children.first?.removeFromParent()
         }
-
+        
     }
     
     //pressed correct side
@@ -450,13 +462,13 @@ class JustinsDemo: SKScene {
         let b10 = SKTexture(imageNamed: "block9")
         let b11 = SKTexture(imageNamed: "block_light")
         
-
+        
         let animate = SKAction.sequence([
             SKAction.animate(with: [b1, b2, b3 ,b4 ,b5, b6 ,b7 ,b8, b9, b10, b11, b11, b10, b9], timePerFrame: 0.06)
             ])
         (tileMaster.children[currentTilePosition] as! SKSpriteNode).run(animate)
         (tileMaster.children[currentTilePosition] as! SKSpriteNode).color = .white
-
+        
         
     }
     
@@ -511,7 +523,7 @@ class JustinsDemo: SKScene {
         if pausedState == false{
             //this is so that this happens every 1/60s instead of depending on how fast the device updates
             if (Int(floor(Double(time))) > sixtyFPS) {
-            
+                
                 sixtyFPS += 1/60
                 player.position.y = player.position.y - spd
                 tileMaster.position.y = tileMaster.position.y - spd
@@ -537,27 +549,25 @@ class JustinsDemo: SKScene {
             spd = 3.3
             randomMax = 4
         }
-
+        
         time = (currentTime - startTime)
         
         //this function happens every second
         /*
-        if (Int(floor(Double(time))) > second) {
-            second += 1
-            
-            //If player started, then the catcher starts moving
-            if playerStarted {
-                currentCatcherPosition += catcherSpeed
-                disappear(i: currentCatcherPosition)
-            }
-            
-            if currentCatcherPosition > currentNumberPosition {
-                lose()
-            }
-        }
-        */
-
-        
+         if (Int(floor(Double(time))) > second) {
+         second += 1
+         
+         //If player started, then the catcher starts moving
+         if playerStarted {
+         currentCatcherPosition += catcherSpeed
+         disappear(i: currentCatcherPosition)
+         }
+         
+         if currentCatcherPosition > currentNumberPosition {
+         lose()
+         }
+         }
+         */
         if player.position.y < -self.size.height/2 {
             
             pausedState = true

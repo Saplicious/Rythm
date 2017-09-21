@@ -19,9 +19,12 @@
 		525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A18B91F56845F000F7C9D /* Images.xcassets */; };
 		52A49B071F70EA0B00985861 /* JustinsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A49B061F70EA0B00985861 /* JustinsDemo.swift */; };
 		52A49B091F70EA2700985861 /* JustinsDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52A49B081F70EA2700985861 /* JustinsDemo.sks */; };
-		52A49B0B1F72418800985861 /* regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52A49B0A1F72418500985861 /* regular.ttf */; };
-		EA89273B1F588F99002995B7 /* JacksDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA89273A1F588F99002995B7 /* JacksDemo.swift */; };
-		EA89273D1F589799002995B7 /* JacksDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA89273C1F589799002995B7 /* JacksDemo.sks */; };
+		EA3E86451F73A3D8006C671D /* DataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86401F73A3D8006C671D /* DataEncoder.swift */; };
+		EA3E86461F73A3D8006C671D /* JacksDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA3E86411F73A3D8006C671D /* JacksDemo.sks */; };
+		EA3E86471F73A3D8006C671D /* JacksDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86421F73A3D8006C671D /* JacksDemo.swift */; };
+		EA3E86481F73A3D8006C671D /* RewardSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86431F73A3D8006C671D /* RewardSystem.swift */; };
+		EA3E86491F73A3D8006C671D /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86441F73A3D8006C671D /* Tile.swift */; };
+		EA3E864D1F73AB09006C671D /* MergedScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E864C1F73AB09006C671D /* MergedScene2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,10 +63,12 @@
 		525A18B91F56845F000F7C9D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		52A49B061F70EA0B00985861 /* JustinsDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustinsDemo.swift; sourceTree = "<group>"; };
 		52A49B081F70EA2700985861 /* JustinsDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JustinsDemo.sks; sourceTree = "<group>"; };
-		52A49B0A1F72418500985861 /* regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = regular.ttf; path = ../../../Downloads/Noto_Sans/regular.ttf; sourceTree = "<group>"; };
-		52A49B0C1F72428600985861 /* bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bold.ttf; path = ../../../Downloads/Noto_Sans/bold.ttf; sourceTree = "<group>"; };
-		EA89273A1F588F99002995B7 /* JacksDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JacksDemo.swift; sourceTree = "<group>"; };
-		EA89273C1F589799002995B7 /* JacksDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JacksDemo.sks; sourceTree = "<group>"; };
+		EA3E86401F73A3D8006C671D /* DataEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataEncoder.swift; sourceTree = "<group>"; };
+		EA3E86411F73A3D8006C671D /* JacksDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JacksDemo.sks; sourceTree = "<group>"; };
+		EA3E86421F73A3D8006C671D /* JacksDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JacksDemo.swift; sourceTree = "<group>"; };
+		EA3E86431F73A3D8006C671D /* RewardSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardSystem.swift; sourceTree = "<group>"; };
+		EA3E86441F73A3D8006C671D /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		EA3E864C1F73AB09006C671D /* MergedScene2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergedScene2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,20 +120,22 @@
 		3D55C3651F512AB50019CA48 /* Rhythm */ = {
 			isa = PBXGroup;
 			children = (
+				EA3E86401F73A3D8006C671D /* DataEncoder.swift */,
+				EA3E86411F73A3D8006C671D /* JacksDemo.sks */,
+				EA3E86421F73A3D8006C671D /* JacksDemo.swift */,
+				EA3E864C1F73AB09006C671D /* MergedScene2.swift */,
+				52A49B061F70EA0B00985861 /* JustinsDemo.swift */,
+				52A49B081F70EA2700985861 /* JustinsDemo.sks */,
+				EA3E86431F73A3D8006C671D /* RewardSystem.swift */,
+				EA3E86441F73A3D8006C671D /* Tile.swift */,
 				3D55C3661F512AB50019CA48 /* AppDelegate.swift */,
 				3D55C36C1F512AB50019CA48 /* GameScene.swift */,
 				3D55C3681F512AB50019CA48 /* GameScene.sks */,
-				52A49B061F70EA0B00985861 /* JustinsDemo.swift */,
-				52A49B081F70EA2700985861 /* JustinsDemo.sks */,
-				EA89273A1F588F99002995B7 /* JacksDemo.swift */,
-				EA89273C1F589799002995B7 /* JacksDemo.sks */,
 				3D55C36A1F512AB50019CA48 /* Actions.sks */,
 				3D55C36E1F512AB50019CA48 /* GameViewController.swift */,
 				3D55C3701F512AB50019CA48 /* Main.storyboard */,
 				3D55C3751F512AB50019CA48 /* LaunchScreen.storyboard */,
 				3D55C3781F512AB50019CA48 /* Info.plist */,
-				52A49B0C1F72428600985861 /* bold.ttf */,
-				52A49B0A1F72418500985861 /* regular.ttf */,
 			);
 			path = Rhythm;
 			sourceTree = "<group>";
@@ -219,7 +226,7 @@
 				TargetAttributes = {
 					3D55C3621F512AB50019CA48 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 9YG65M4NPM;
+						DevelopmentTeam = 78GQ3B89Q7;
 						ProvisioningStyle = Automatic;
 					};
 					3D55C37C1F512AB50019CA48 = {
@@ -263,9 +270,8 @@
 			files = (
 				3D55C3721F512AB50019CA48 /* Main.storyboard in Resources */,
 				52A49B091F70EA2700985861 /* JustinsDemo.sks in Resources */,
+				EA3E86461F73A3D8006C671D /* JacksDemo.sks in Resources */,
 				3D55C3691F512AB50019CA48 /* GameScene.sks in Resources */,
-				EA89273D1F589799002995B7 /* JacksDemo.sks in Resources */,
-				52A49B0B1F72418800985861 /* regular.ttf in Resources */,
 				3D55C3771F512AB50019CA48 /* LaunchScreen.storyboard in Resources */,
 				525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */,
 				3D55C36B1F512AB50019CA48 /* Actions.sks in Resources */,
@@ -294,10 +300,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D55C36D1F512AB50019CA48 /* GameScene.swift in Sources */,
-				EA89273B1F588F99002995B7 /* JacksDemo.swift in Sources */,
 				52A49B071F70EA0B00985861 /* JustinsDemo.swift in Sources */,
 				3D55C36F1F512AB50019CA48 /* GameViewController.swift in Sources */,
+				EA3E86491F73A3D8006C671D /* Tile.swift in Sources */,
+				EA3E864D1F73AB09006C671D /* MergedScene2.swift in Sources */,
 				3D55C3671F512AB50019CA48 /* AppDelegate.swift in Sources */,
+				EA3E86451F73A3D8006C671D /* DataEncoder.swift in Sources */,
+				EA3E86481F73A3D8006C671D /* RewardSystem.swift in Sources */,
+				EA3E86471F73A3D8006C671D /* JacksDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9YG65M4NPM;
+				DEVELOPMENT_TEAM = 78GQ3B89Q7;
 				INFOPLIST_FILE = Rhythm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -463,7 +473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9YG65M4NPM;
+				DEVELOPMENT_TEAM = 78GQ3B89Q7;
 				INFOPLIST_FILE = Rhythm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
