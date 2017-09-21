@@ -34,8 +34,10 @@ class JustinsDemo: SKScene {
     let ring = SKSpriteNode(imageNamed: "ring")
     var scoreNode:SKLabelNode = SKLabelNode(fontNamed: "bold")
     var score = 0
-    
     var layer = 1000000
+    
+    var spd:CGFloat = 1
+    var randomMax = 8
     
     var buttonMaster = SKNode()
     
@@ -119,11 +121,11 @@ class JustinsDemo: SKScene {
     
     //generate numbers 0,1
     func generate() {
-        let rn = Int(arc4random_uniform(8))
-        if rn == 4 || rn == 5 {
+        let rn = Int(arc4random_uniform(UInt32(randomMax)))
+        if rn == 4 || rn == 6 {
             arrayOfNumbers.append(0)
         }
-        else if rn == 6 || rn == 7 {
+        else if rn == 5 || rn == 7 {
             arrayOfNumbers.append(1)
         }
         else {
@@ -250,27 +252,40 @@ class JustinsDemo: SKScene {
         
         if (arrayOfNumbers[currentNumberPosition] == 0) {
             
-            tileMaster.run(SKAction.moveBy(x: (-tileSize / 2) + 2.5, y: -tileSize2 / 3.4, duration: 0.15))
-            //shadowMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.15))
+            tileMaster.run(SKAction.moveBy(x: (-tileSize / 2) + 2.5, y: -tileSize2 / 3.4, duration: 0.20))
+            //shadowMaster.run(SKAction.moveBy(x: tileSize, y: -tileSize, duration: 0.20))
             
             
         } else if (arrayOfNumbers[currentNumberPosition] == 1) {
             
             
-            tileMaster.run(SKAction.moveBy(x: (tileSize / 2) - 2.5, y: -tileSize2 / 3.4, duration: 0.15))
-            //shadowMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.15))
+            tileMaster.run(SKAction.moveBy(x: (tileSize / 2) - 2.5, y: -tileSize2 / 3.4, duration: 0.20))
+            //shadowMaster.run(SKAction.moveBy(x: -tileSize, y: -tileSize, duration: 0.20))
             
             
         } else if (arrayOfNumbers[currentNumberPosition] == 2) {
             
-            tileMaster.run(SKAction.moveBy(x: -tileSize / 2  + 2.5, y: -tileSize2 / 1.5, duration: 0.15))
+            tileMaster.run(SKAction.moveBy(x: -tileSize / 2  + 2.5, y: -tileSize2 / 1.5, duration: 0.20))
 
             
         }
         else if (arrayOfNumbers[currentNumberPosition] == 3) {
             
-            tileMaster.run(SKAction.moveBy(x: tileSize / 2 - 2.5, y: 25, duration: 0.15))
+            tileMaster.run(SKAction.moveBy(x: tileSize / 2 - 2.5, y: 25, duration: 0.20))
     
+        }
+
+        if player.position.y < 200{
+            
+            
+            player.run(SKAction.moveBy(x: 0, y: 60, duration: 0.20))
+            tileMaster.run(SKAction.moveBy(x: 0, y: 60, duration: 0.20))
+        
+        }
+        else{
+            
+            player.run(SKAction.moveBy(x: 0, y: 10, duration: 0.20))
+            tileMaster.run(SKAction.moveBy(x: 0, y: 10, duration: 0.20))
         }
     
         if location == 0 {
@@ -339,10 +354,10 @@ class JustinsDemo: SKScene {
         
         print(tileMaster.children.count)
         
-        player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.075),SKAction.run {
+        player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.10),SKAction.run {
             self.player.zPosition = CGFloat(self.layer + 208)
-            self.ring.zPosition = CGFloat(self.layer + 208)
-            },SKAction.moveBy(x: 0, y: -80, duration: 0.075)]))
+            self.ring.zPosition = CGFloat(self.layer + 206)
+            },SKAction.moveBy(x: 0, y: -80, duration: 0.10)]))
         //tileMaster.position = CGPoint(x: tileMaster.position.x ,y: tileMaster.position.y - tileSize)
         
         
@@ -476,10 +491,38 @@ class JustinsDemo: SKScene {
         if startTime == 0 {
             startTime = currentTime
         }
-        
+        if pausedState == false{
+            
+            player.position.y = player.position.y - spd
+            tileMaster.position.y = tileMaster.position.y - spd
+            
+            
+        }
+        if score == 50{
+            spd = 1.5
+        }
+        if score == 100{
+            spd = 1.7
+        }
+        if score == 200{
+            spd = 2.0
+            randomMax = 6
+        }
+        if score == 300{
+            spd = 3.0
+        }
+        if score == 400{
+            spd = 3.3
+        }
+        if score == 500{
+            spd = 3.3
+            randomMax = 4
+        }
+
         time = (currentTime - startTime)
         
         //this function happens every second
+        /*
         if (Int(floor(Double(time))) > second) {
             second += 1
             
@@ -493,7 +536,13 @@ class JustinsDemo: SKScene {
                 lose()
             }
         }
-        
+        */
+        if player.position.y < -self.size.height/2 {
+            
+            pausedState = true
+            lose()
+            
+        }
         
         //if the player tapped the screen, start the timer
         if currentNumberPosition != 0 {
