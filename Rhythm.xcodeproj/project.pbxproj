@@ -19,6 +19,11 @@
 		525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A18B91F56845F000F7C9D /* Images.xcassets */; };
 		52A49B071F70EA0B00985861 /* JustinsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A49B061F70EA0B00985861 /* JustinsDemo.swift */; };
 		52A49B091F70EA2700985861 /* JustinsDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52A49B081F70EA2700985861 /* JustinsDemo.sks */; };
+		EA3E86451F73A3D8006C671D /* DataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86401F73A3D8006C671D /* DataEncoder.swift */; };
+		EA3E86461F73A3D8006C671D /* JacksDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA3E86411F73A3D8006C671D /* JacksDemo.sks */; };
+		EA3E86471F73A3D8006C671D /* JacksDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86421F73A3D8006C671D /* JacksDemo.swift */; };
+		EA3E86481F73A3D8006C671D /* RewardSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86431F73A3D8006C671D /* RewardSystem.swift */; };
+		EA3E86491F73A3D8006C671D /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86441F73A3D8006C671D /* Tile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,11 @@
 		525A18B91F56845F000F7C9D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		52A49B061F70EA0B00985861 /* JustinsDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustinsDemo.swift; sourceTree = "<group>"; };
 		52A49B081F70EA2700985861 /* JustinsDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JustinsDemo.sks; sourceTree = "<group>"; };
+		EA3E86401F73A3D8006C671D /* DataEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataEncoder.swift; sourceTree = "<group>"; };
+		EA3E86411F73A3D8006C671D /* JacksDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JacksDemo.sks; sourceTree = "<group>"; };
+		EA3E86421F73A3D8006C671D /* JacksDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JacksDemo.swift; sourceTree = "<group>"; };
+		EA3E86431F73A3D8006C671D /* RewardSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardSystem.swift; sourceTree = "<group>"; };
+		EA3E86441F73A3D8006C671D /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,11 @@
 		3D55C3651F512AB50019CA48 /* Rhythm */ = {
 			isa = PBXGroup;
 			children = (
+				EA3E86401F73A3D8006C671D /* DataEncoder.swift */,
+				EA3E86411F73A3D8006C671D /* JacksDemo.sks */,
+				EA3E86421F73A3D8006C671D /* JacksDemo.swift */,
+				EA3E86431F73A3D8006C671D /* RewardSystem.swift */,
+				EA3E86441F73A3D8006C671D /* Tile.swift */,
 				3D55C3661F512AB50019CA48 /* AppDelegate.swift */,
 				3D55C36C1F512AB50019CA48 /* GameScene.swift */,
 				3D55C3681F512AB50019CA48 /* GameScene.sks */,
@@ -252,6 +267,7 @@
 			files = (
 				3D55C3721F512AB50019CA48 /* Main.storyboard in Resources */,
 				52A49B091F70EA2700985861 /* JustinsDemo.sks in Resources */,
+				EA3E86461F73A3D8006C671D /* JacksDemo.sks in Resources */,
 				3D55C3691F512AB50019CA48 /* GameScene.sks in Resources */,
 				3D55C3771F512AB50019CA48 /* LaunchScreen.storyboard in Resources */,
 				525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */,
@@ -283,7 +299,11 @@
 				3D55C36D1F512AB50019CA48 /* GameScene.swift in Sources */,
 				52A49B071F70EA0B00985861 /* JustinsDemo.swift in Sources */,
 				3D55C36F1F512AB50019CA48 /* GameViewController.swift in Sources */,
+				EA3E86491F73A3D8006C671D /* Tile.swift in Sources */,
 				3D55C3671F512AB50019CA48 /* AppDelegate.swift in Sources */,
+				EA3E86451F73A3D8006C671D /* DataEncoder.swift in Sources */,
+				EA3E86481F73A3D8006C671D /* RewardSystem.swift in Sources */,
+				EA3E86471F73A3D8006C671D /* JacksDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
