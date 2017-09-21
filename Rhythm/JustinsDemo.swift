@@ -537,6 +537,8 @@ class JustinsDemo: SKScene {
             }
         }
         */
+
+        
         if player.position.y < -self.size.height/2 {
             
             pausedState = true
