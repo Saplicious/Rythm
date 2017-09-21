@@ -505,20 +505,25 @@ class JustinsDemo: SKScene {
     var time: TimeInterval = 0
     var startTime: TimeInterval = 0
     var second = 0
+    var sixtyFPS = 1/60
     
     
     override func update(_ currentTime: TimeInterval) {
         
         //intiate the start time
+        
+        
         if startTime == 0 {
             startTime = currentTime
         }
         if pausedState == false{
+            //this is so that this happens every 1/60s instead of depending on how fast the device updates
+            if (Int(floor(Double(time))) > sixtyFPS) {
             
-            player.position.y = player.position.y - spd
-            tileMaster.position.y = tileMaster.position.y - spd
-            
-            
+                sixtyFPS += 1/60
+                player.position.y = player.position.y - spd
+                tileMaster.position.y = tileMaster.position.y - spd
+            }
         }
         if score == 50{
             spd = 1.5
