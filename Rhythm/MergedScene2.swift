@@ -28,7 +28,7 @@ class MergedScene2: SKScene {
     var menu = SKNode()
     var scoreNode = SKLabelNode(fontNamed: "bold")
     var highScoreNode = SKLabelNode()
-    //let ring = SKSpriteNode(imageNamed: "ring")
+    let ring = SKSpriteNode(imageNamed: "ring")
     
     //Variables
     var currentTilePosition = 1
@@ -98,19 +98,19 @@ class MergedScene2: SKScene {
         //load the stuff that doesn't need resetting
         
             //initialize background
-        let background = SKSpriteNode(imageNamed: "bg5")
+        let background = SKSpriteNode(imageNamed: "bg6")
         background.position = CGPoint(x: 0, y: 0)
         background.size = CGSize(width: self.size.width, height: self.size.height)
         background.zPosition = 0
         addChild(background)
         
             //initialize ring
-        /*
+        
         ring.position = CGPoint(x: 0, y: 0)
         ring.size = CGSize(width: self.size.width, height: self.size.height)
         ring.zPosition = CGFloat(self.layer + 208)
         addChild(ring)
-        */
+        
         
             //initialize scorenode
         scoreNode.fontSize = 60
@@ -119,20 +119,22 @@ class MergedScene2: SKScene {
         scoreNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         scoreNode.zPosition = 100000000
         scoreNode.fontColor = SKColor(red: 75/255, green: 70/255, blue: 62/255, alpha: 1.0)
+        scoreNode.alpha = 0.0
         
             //initialize player
         player = SKSpriteNode(imageNamed: "player")
-        player.size = CGSize(width: 81, height: 138)
-        player.position = CGPoint(x: 0 ,y: -110)
+        player.size = CGSize(width: 81 , height: 138)
+        player.position = CGPoint(x: 0 ,y: 120)
         player.zPosition = CGFloat(layer + 208)
         
         //add the menu to the scene
             //initialize highScoreNode
-        highScoreNode.text = String(highscore)
-        highScoreNode.fontColor = UIColor.red
-        highScoreNode.position = CGPoint(x:0 ,y: 600)
-        highScoreNode.fontSize = 50
-        highScoreNode.fontName = "KannadaSangamMN"
+        highScoreNode.text = String("highscore \(highscore)")
+        highScoreNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        highScoreNode.fontColor = SKColor(red: 75/255, green: 70/255, blue: 62/255, alpha: 1.0)
+        highScoreNode.position = CGPoint(x: self.size.width * -0.34, y: self.size.height * 0.38)
+        highScoreNode.fontSize = 60
+        highScoreNode.fontName = "bold"
         
             //initialize settings button
         let settings = SKSpriteNode(imageNamed: "setting")
@@ -171,6 +173,7 @@ class MergedScene2: SKScene {
     //once the scene loads
     func load() {
         
+        
         layer = 100000
         score = 0
         scoreNode.text = String(score)
@@ -185,7 +188,7 @@ class MergedScene2: SKScene {
         print(tileMaster)
         self.addChild(tileMaster)
         
-        player.position = CGPoint(x: 0 ,y: -110)
+        player.position = CGPoint(x: 0 ,y: -123)
         player.zPosition = CGFloat(layer + 208)
         currentTilePosition = 1
         currentCatcherPosition = 0
@@ -247,6 +250,7 @@ class MergedScene2: SKScene {
             //down
             tile.position = CGPoint(x: (tileMaster.children.last?.position)!.x - (tileWidth / 2) + 2.5, y:((tileMaster.children.last?.position)!.y - 25))
         }
+        
         //if there are more than 100 tiles, remove tiles from bottom
         if tileMaster.children.count > 100 {
             changecurrentposition = false
@@ -356,7 +360,7 @@ class MergedScene2: SKScene {
         
         player.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 80, duration: 0.10),SKAction.run {
             self.player.zPosition = CGFloat(self.tileMaster.children[self.currentTilePosition - 1].zPosition + CGFloat(1))
-            //self.ring.zPosition = CGFloat(self.tileMaster.children[self.currentTilePosition].zPosition - 1)
+            self.ring.zPosition = CGFloat(self.tileMaster.children[self.currentTilePosition].zPosition - 1)
             },SKAction.moveBy(x: 0, y: -80, duration: 0.10)]))
         print(player.zPosition)
         print(tileMaster.children[self.currentTilePosition].zPosition)
@@ -438,6 +442,9 @@ class MergedScene2: SKScene {
         }
         data.setHighScore(hs: highscore)
         
+        //make ring right layer
+        self.ring.zPosition = CGFloat(layer)
+        
         //reset the game
         showMenu()
         saveData()
@@ -453,14 +460,18 @@ class MergedScene2: SKScene {
     }
     
     func showMenu() {
+        
         pausedState = true
-        highScoreNode.text = String(highscore)
+        highScoreNode.text = "highscore \(highscore)"
+        highScoreNode.alpha = 1.0
+        scoreNode.alpha = 0.0
         self.addChild(menu)
     }
     
     func hideMenu() {
         
         pausedState = false
+        scoreNode.alpha = 1.0
         menu.removeFromParent()
     }
     
