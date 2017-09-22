@@ -28,6 +28,8 @@ class MergedScene2: SKScene {
     var menu = SKNode()
     var scoreNode = SKLabelNode(fontNamed: "bold")
     var highScoreNode = SKLabelNode()
+    var topLabel = SKLabelNode()
+    var bottomLabel = SKLabelNode()
     let ring = SKSpriteNode(imageNamed: "ring")
     
     //Variables
@@ -129,12 +131,20 @@ class MergedScene2: SKScene {
         
         //add the menu to the scene
             //initialize highScoreNode
-        highScoreNode.text = String("highscore \(highscore)")
+        highScoreNode.text = String("\(highscore)")
         highScoreNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         highScoreNode.fontColor = SKColor(red: 75/255, green: 70/255, blue: 62/255, alpha: 1.0)
         highScoreNode.position = CGPoint(x: self.size.width * -0.34, y: self.size.height * 0.38)
         highScoreNode.fontSize = 60
         highScoreNode.fontName = "bold"
+        
+        topLabel.text = String("h i g h s c o r e")
+        topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        topLabel.fontColor = SKColor(red: 75/255, green: 70/255, blue: 62/255, alpha: 1.0)
+        topLabel.position = CGPoint(x: self.size.width * -0.34, y: self.size.height * 0.35)
+        topLabel.fontSize = 30
+        topLabel.fontName = "bold"
+        topLabel.zPosition = CGFloat(layer + 1000000)
         
             //initialize settings button
         let settings = SKSpriteNode(imageNamed: "setting")
@@ -160,6 +170,7 @@ class MergedScene2: SKScene {
         showMenu()
         menu.addChild(highScoreNode)
         
+        self.addChild(topLabel)
         self.addChild(scoreNode)
         self.addChild(player)
         
@@ -462,14 +473,16 @@ class MergedScene2: SKScene {
     func showMenu() {
         
         pausedState = true
-        highScoreNode.text = "highscore \(highscore)"
+        highScoreNode.text = String(highscore)
         highScoreNode.alpha = 1.0
+        topLabel.text = "h i g h s c o r e"
         scoreNode.alpha = 0.0
         self.addChild(menu)
     }
     
     func hideMenu() {
         
+        topLabel.text = "s c o r e"
         pausedState = false
         scoreNode.alpha = 1.0
         menu.removeFromParent()
@@ -564,6 +577,52 @@ class MergedScene2: SKScene {
                 timeSinceStart += 1
             }
         }
+        if score == 0{
+            
+            catcherSpeed = 0.02
+            
+        }
+        if score == 10{
+            
+            catcherSpeed = 0.03
+            
+        }
+        if score == 20{
+            
+            catcherSpeed = 0.035
+            
+        }
+        if score == 30{
+            
+            catcherSpeed = 0.04
+            
+        }
+        if score == 40{
+            
+            catcherSpeed = 0.045
+            
+        }
+        if score == 50{
+            
+            catcherSpeed = 0.050
+            
+        }
+        if score == 60{
+            
+            catcherSpeed = 0.055
+            
+        }
+        if score == 70{
+            
+            catcherSpeed = 0.060
+            
+        }
+        if score == 80{
+            
+            catcherSpeed = 0.065
+            
+        }
+        
         
         
         //happens every 1/60 second
@@ -576,14 +635,14 @@ class MergedScene2: SKScene {
                     if currentCatcherPosition >= (currentTilePosition - 1) {
                         pausedState = true
                     }
+                    fall()
                     currentCatcherPosition += 1
                     catcherUpdate = 0.0
-                    fall()
                 }
             }
             
-            if (currentTilePosition - currentCatcherPosition) > 15 {
-                currentCatcherPosition = currentTilePosition - 15
+            if (currentTilePosition - currentCatcherPosition) > 10 {
+                currentCatcherPosition = currentTilePosition - 10
             }
         }
         
@@ -593,7 +652,7 @@ class MergedScene2: SKScene {
             //menu.removeFromParent()
             
             //wait 3 seconds and go
-            if timeSinceStart > 1 {
+            if timeSinceStart > 0 {
                 playerStarted = true
             }
             
