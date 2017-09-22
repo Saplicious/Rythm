@@ -19,6 +19,7 @@
 		525A18BA1F56845F000F7C9D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A18B91F56845F000F7C9D /* Images.xcassets */; };
 		52A49B071F70EA0B00985861 /* JustinsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A49B061F70EA0B00985861 /* JustinsDemo.swift */; };
 		52A49B091F70EA2700985861 /* JustinsDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52A49B081F70EA2700985861 /* JustinsDemo.sks */; };
+		52A49B101F74E26E00985861 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A49B0F1F74E26E00985861 /* Coin.swift */; };
 		EA3E86451F73A3D8006C671D /* DataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86401F73A3D8006C671D /* DataEncoder.swift */; };
 		EA3E86461F73A3D8006C671D /* JacksDemo.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA3E86411F73A3D8006C671D /* JacksDemo.sks */; };
 		EA3E86471F73A3D8006C671D /* JacksDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E86421F73A3D8006C671D /* JacksDemo.swift */; };
@@ -63,6 +64,7 @@
 		525A18B91F56845F000F7C9D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		52A49B061F70EA0B00985861 /* JustinsDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustinsDemo.swift; sourceTree = "<group>"; };
 		52A49B081F70EA2700985861 /* JustinsDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JustinsDemo.sks; sourceTree = "<group>"; };
+		52A49B0F1F74E26E00985861 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Coin.swift; path = ../Coin.swift; sourceTree = "<group>"; };
 		EA3E86401F73A3D8006C671D /* DataEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataEncoder.swift; sourceTree = "<group>"; };
 		EA3E86411F73A3D8006C671D /* JacksDemo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = JacksDemo.sks; sourceTree = "<group>"; };
 		EA3E86421F73A3D8006C671D /* JacksDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JacksDemo.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				52A49B081F70EA2700985861 /* JustinsDemo.sks */,
 				EA3E86431F73A3D8006C671D /* RewardSystem.swift */,
 				EA3E86441F73A3D8006C671D /* Tile.swift */,
+				52A49B0F1F74E26E00985861 /* Coin.swift */,
 				3D55C3661F512AB50019CA48 /* AppDelegate.swift */,
 				3D55C36C1F512AB50019CA48 /* GameScene.swift */,
 				3D55C3681F512AB50019CA48 /* GameScene.sks */,
@@ -307,6 +310,7 @@
 				3D55C3671F512AB50019CA48 /* AppDelegate.swift in Sources */,
 				EA3E86451F73A3D8006C671D /* DataEncoder.swift in Sources */,
 				EA3E86481F73A3D8006C671D /* RewardSystem.swift in Sources */,
+				52A49B101F74E26E00985861 /* Coin.swift in Sources */,
 				EA3E86471F73A3D8006C671D /* JacksDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

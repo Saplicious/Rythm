@@ -16,7 +16,7 @@ import os.log
 
 class JacksDemo: SKScene {
     
-    var data = DataEncoder(lastLogonDate: Date(), highScore: 0)
+    var data = DataEncoder(lastLogonDate: Date(), highScore: 0, currency: 0)
     
     var changecurrentposition = true
     var playerStarted: Bool = false

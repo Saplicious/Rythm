@@ -15,7 +15,7 @@ import os.log
 class MergedScene2: SKScene {
     
     //Data
-    var data = DataEncoder(lastLogonDate: Date(), highScore: 0)
+    var data = DataEncoder(lastLogonDate: Date(), highScore: 0, currency: 0)
     
     //Booleans
     var changecurrentposition = true
@@ -28,9 +28,11 @@ class MergedScene2: SKScene {
     var menu = SKNode()
     var scoreNode = SKLabelNode(fontNamed: "bold")
     var highScoreNode = SKLabelNode()
+    var coinsNode = SKLabelNode()
     var topLabel = SKLabelNode()
     var bottomLabel = SKLabelNode()
     let ring = SKSpriteNode(imageNamed: "ring")
+    var coinMaster = SKNode()
     
     //Variables
     var currentTilePosition = 1
@@ -41,7 +43,9 @@ class MergedScene2: SKScene {
     var tileHeight: CGFloat = 258
     var score:Int = 0
     var highscore:Int = 0
+    var currency:Int = 0
     var layer = 100000
+    
     
     
     // ********* MOVED TO SCENE ************
@@ -77,6 +81,7 @@ class MergedScene2: SKScene {
         
         //set highscore to highscore in data
         highscore = data.highScore
+        currency = data.currency
         
         
         //Logon date for rewards still *WIP*
@@ -117,8 +122,8 @@ class MergedScene2: SKScene {
             //initialize scorenode
         scoreNode.fontSize = 60
         scoreNode.text = ("\(score)")
-        scoreNode.position = CGPoint(x: -self.size.width * 0.34, y: self.size.height * 0.38)
-        scoreNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        scoreNode.position = CGPoint(x: self.size.width * 0.35, y: self.size.height * 0.35)
+        scoreNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         scoreNode.zPosition = 100000000
         scoreNode.fontColor = SKColor(red: 75/255, green: 70/255, blue: 62/255, alpha: 1.0)
         scoreNode.alpha = 0.0
@@ -132,19 +137,35 @@ class MergedScene2: SKScene {
         //add the menu to the scene
             //initialize highScoreNode
         highScoreNode.text = String("\(highscore)")
-        highScoreNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        highScoreNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         highScoreNode.fontColor = SKColor(red: 75/255, green: 70/255, blue: 62/255, alpha: 1.0)
-        highScoreNode.position = CGPoint(x: self.size.width * -0.34, y: self.size.height * 0.38)
+        highScoreNode.position = CGPoint(x: self.size.width * 0.35, y: self.size.height * 0.35)
         highScoreNode.fontSize = 60
         highScoreNode.fontName = "bold"
         
         topLabel.text = String("h i g h s c o r e")
-        topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         topLabel.fontColor = SKColor(red: 75/255, green: 70/255, blue: 62/255, alpha: 1.0)
-        topLabel.position = CGPoint(x: self.size.width * -0.34, y: self.size.height * 0.35)
-        topLabel.fontSize = 30
+        topLabel.position = CGPoint(x: self.size.width * 0.35, y: self.size.height * 0.39)
+        topLabel.fontSize = 40
         topLabel.fontName = "bold"
         topLabel.zPosition = CGFloat(layer + 1000000)
+        
+        coinsNode.text = String("\(currency)")
+        coinsNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
+        coinsNode.fontColor = SKColor(red: 75/255, green: 70/255, blue: 62/255, alpha: 1.0)
+        coinsNode.position = CGPoint(x: self.size.width * 0.35, y: self.size.height * 0.27)
+        coinsNode.fontSize = 60
+        coinsNode.fontName = "bold"
+        coinsNode.zPosition = CGFloat(layer + 1000000)
+        
+        bottomLabel.text = String("c o i n s")
+        bottomLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
+        bottomLabel.fontColor = SKColor(red: 75/255, green: 70/255, blue: 62/255, alpha: 1.0)
+        bottomLabel.position = CGPoint(x: self.size.width * 0.35, y: self.size.height * 0.31)
+        bottomLabel.fontSize = 40
+        bottomLabel.fontName = "bold"
+        bottomLabel.zPosition = CGFloat(layer + 1000000)
         
             //initialize settings button
         let settings = SKSpriteNode(imageNamed: "setting")
@@ -170,6 +191,8 @@ class MergedScene2: SKScene {
         showMenu()
         menu.addChild(highScoreNode)
         
+        self.addChild(bottomLabel)
+        self.addChild(coinsNode)
         self.addChild(topLabel)
         self.addChild(scoreNode)
         self.addChild(player)
@@ -198,8 +221,9 @@ class MergedScene2: SKScene {
         //tileMaster.position = CGPoint(x:0, y: -200)
         print(tileMaster)
         self.addChild(tileMaster)
+        self.addChild(coinMaster)
         
-        player.position = CGPoint(x: 0 ,y: -123)
+        player.position = CGPoint(x: 0 ,y: -120)
         player.zPosition = CGFloat(layer + 208)
         currentTilePosition = 1
         currentCatcherPosition = 0
@@ -222,6 +246,7 @@ class MergedScene2: SKScene {
             tile.position = CGPoint(x: 0 ,y: -200)
             tile.zPosition = CGFloat(layer)
             tileMaster.addChild(tile)
+            
             return
         }
         
@@ -243,6 +268,7 @@ class MergedScene2: SKScene {
             //block 4
             tileId = 3
         }
+        
         
         //remember to set the tile's id to tileId
         tile.setTileId(id: tileId)
@@ -266,8 +292,10 @@ class MergedScene2: SKScene {
         if tileMaster.children.count > 100 {
             changecurrentposition = false
             tileMaster.children.first?.removeFromParent()
+            coinMaster.children.first?.removeFromParent()
             currentCatcherPosition -= 1
         }
+
         
         //set the tile's zposition
         tile.zPosition = CGFloat((tileMaster.children.last?.zPosition)! - CGFloat(2))
@@ -275,7 +303,31 @@ class MergedScene2: SKScene {
         //adds the child to tilemaster
         tileMaster.addChild(tile)
         
+        //chance of getting a coin
+        let a = Double(Double(arc4random()) / Double(UINT32_MAX))
+        let coin = Coin(imageNamed: "coin")
+        
+        coin.position = CGPoint(x: 100, y: 0)
+        coin.setCoinId(id: false)
+        coin.alpha = 0.0
+        coin.zPosition = 0
+        
+        
+        //chance of getting each block 25%
+        
+        if 0 <= a && a < 0.20 {
+            if tileMaster.children.count > 10 {
+                coin.position = CGPoint(x: tile.position.x, y: tile.position.y + 65)
+                coin.zPosition = tile.zPosition + 1
+                coin.setCoinId(id: true)
+                coin.alpha = 1.0
+            }
+        }
+        
+        coinMaster.addChild(coin)
+        
     }
+    
     
     //this will be the daily reward
     func reward() {
@@ -307,6 +359,7 @@ class MergedScene2: SKScene {
         } else if (currentTileId == 0) {
             //move left
             tileMaster.run(SKAction.moveBy(x: (-tileWidth / 2) + 2.5, y: -tileHeight / 3.4, duration: 0.20))
+            coinMaster.run(SKAction.moveBy(x: (-tileWidth / 2) + 2.5, y: -tileHeight / 3.4, duration: 0.20))
             
             if location == 0 {
                 success()
@@ -318,6 +371,7 @@ class MergedScene2: SKScene {
         } else if (currentTileId == 1) {
             //move right
             tileMaster.run(SKAction.moveBy(x: (tileWidth / 2) - 2.5, y: -tileHeight / 3.4, duration: 0.20))
+            coinMaster.run(SKAction.moveBy(x: (tileWidth / 2) - 2.5, y: -tileHeight / 3.4, duration: 0.20))
             
             if location == 1 {
                 success()
@@ -329,6 +383,7 @@ class MergedScene2: SKScene {
         } else if (currentTileId == 2) {
             //move up
             tileMaster.run(SKAction.moveBy(x: -tileWidth / 2  + 2.5, y: -tileHeight / 1.5, duration: 0.20))
+            coinMaster.run(SKAction.moveBy(x: -tileWidth / 2  + 2.5, y: -tileHeight / 1.5, duration: 0.20))
             
             if location == 2 {
                 success()
@@ -340,6 +395,7 @@ class MergedScene2: SKScene {
         } else if (currentTileId == 3) {
             //move down
             tileMaster.run(SKAction.moveBy(x: tileWidth / 2 - 2.5, y: 25, duration: 0.20))
+            coinMaster.run(SKAction.moveBy(x: tileWidth / 2 - 2.5, y: 25, duration: 0.20))
             
             if location == 3 {
                 success()
@@ -347,6 +403,15 @@ class MergedScene2: SKScene {
                 lose()
                 return
             }
+            
+        }
+        //collect coin
+        if (coinMaster.children[currentTilePosition - 1] as! Coin).coinId {
+            
+            (coinMaster.children[currentTilePosition - 1] as! SKSpriteNode).run(SKAction.sequence([SKAction.wait(forDuration: 0.07), SKAction.scale(by: 2.0, duration: 0.15)]))
+            (coinMaster.children[currentTilePosition - 1] as! SKSpriteNode).run(SKAction.sequence([SKAction.wait(forDuration: 0.07), SKAction.fadeOut(withDuration: 0.15)]))
+            currency += 1
+            coinsNode.text = String(currency)
             
         }
         
@@ -452,6 +517,8 @@ class MergedScene2: SKScene {
             highscore = score
         }
         data.setHighScore(hs: highscore)
+        data.setCurrency(c: currency)
+        
         
         //make ring right layer
         self.ring.zPosition = CGFloat(layer)
@@ -460,11 +527,14 @@ class MergedScene2: SKScene {
         showMenu()
         saveData()
         resetGame()
+        
     }
     
     func resetGame() {
         tileMaster.removeFromParent()
+        coinMaster.removeFromParent()
         tileMaster = SKNode()
+        coinMaster = SKNode()
         load()
         //currentTilePosition = 0
         //print("current tile position\(currentTilePosition)")
@@ -482,7 +552,7 @@ class MergedScene2: SKScene {
     
     func hideMenu() {
         
-        topLabel.text = "s c o r e"
+        topLabel.text = "c u r r e n t  s c o r e"
         pausedState = false
         scoreNode.alpha = 1.0
         menu.removeFromParent()
@@ -560,6 +630,8 @@ class MergedScene2: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         
+        
+        
         //intiate the start time
         if startTime == 0 {
             startTime = currentTime
@@ -612,18 +684,6 @@ class MergedScene2: SKScene {
             catcherSpeed = 0.055
             
         }
-        if score == 70{
-            
-            catcherSpeed = 0.060
-            
-        }
-        if score == 80{
-            
-            catcherSpeed = 0.065
-            
-        }
-        
-        
         
         //happens every 1/60 second
         if (time > sixty) {
@@ -645,6 +705,7 @@ class MergedScene2: SKScene {
                 currentCatcherPosition = currentTilePosition - 10
             }
         }
+
         
         //if the player tapped the screen, start the timer
         if currentTilePosition != 1 {
