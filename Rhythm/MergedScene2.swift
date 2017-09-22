@@ -34,7 +34,7 @@ class MergedScene2: SKScene {
     var currentTilePosition = 1
     var timeSinceStart = 0
     var currentCatcherPosition = 0
-    var catcherSpeed = 0.01
+    var catcherSpeed = 0.02
     var tileWidth: CGFloat = 206
     var tileHeight: CGFloat = 258
     var score:Int = 0
@@ -593,7 +593,7 @@ class MergedScene2: SKScene {
             //menu.removeFromParent()
             
             //wait 3 seconds and go
-            if timeSinceStart > 3 {
+            if timeSinceStart > 1 {
                 playerStarted = true
             }
             
